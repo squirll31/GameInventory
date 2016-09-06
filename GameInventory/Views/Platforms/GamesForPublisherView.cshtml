@@ -1,0 +1,10 @@
+﻿@model GamesForGameDevView
+
+            <tr>
+                <td class="col-md-3">
+                    @Html.ActionLink(Model.GameDeveloper, "Details", "Games", new { id = item.GameId }, null)
+                </td>
+                <td class="col-md-3">
+                    @Model.GameCount
+                </td>
+            </tr>

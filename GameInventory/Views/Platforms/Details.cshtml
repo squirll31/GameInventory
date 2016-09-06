@@ -1,0 +1,50 @@
+﻿@model GameInventory.Platform
+
+@{
+    ViewBag.Title = Model.PlatformName + " - Details";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+<h2>@Model.PlatformName</h2>
+
+<div>
+    <h4>Platform Information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PlatformName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlatformName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany.GameCompanyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlatformId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div>
+    <hr />
+    <h4>Games on @Model.PlatformName</h4>
+    <h5>Total: @ViewBag.GameSearchResults.Count</h5>
+
+    @Html.Partial("GameList", (List<Games_SelectAllByPlatform_Result>)ViewBag.GameSearchResults)
+</div>
+<script type="text/javascript">
+    $("#PlatformTable").DataTable();
+    $("#GamesTable").DataTable();
+</script>

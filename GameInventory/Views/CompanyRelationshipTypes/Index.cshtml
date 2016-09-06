@@ -1,0 +1,52 @@
+﻿@model IEnumerable<GameInventory.CompanyRelationshipType>
+
+@{
+    ViewBag.Title = "Game Company Relationship Types";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+<h2>Game Company Relationship Types</h2>
+<h4>Total: @Model.Count()</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="RelationshipTypeTable" class="table table-striped">
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyRelationshipTypeName)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyRelationshipTypeName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CompanyRelationshipTypeId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CompanyRelationshipTypeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CompanyRelationshipTypeId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $("#RelationshipTypeTable").DataTable();
+</script>
+
+
+

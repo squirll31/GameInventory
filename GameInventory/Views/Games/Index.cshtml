@@ -1,0 +1,154 @@
+﻿@model IEnumerable<GameInventory.Game>
+
+@{
+    ViewBag.Title = "Games List";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+
+
+<h2>Games</h2>
+<h4>Total: @Model.Count()</h4>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="GamesTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="col-md-3">
+                @Html.DisplayNameFor(model => model.Platform.PlatformName)
+            </th>
+            <th class="col-md-2">
+
+                @Html.DisplayNameFor(model => model.ModelName)
+            </th>
+            <th class="col-md-1">
+
+                @Html.DisplayNameFor(model => model.GameRegion.GameRegionName)
+            </th>
+            <th class="col-md-1">
+                @Html.DisplayNameFor(model => model.HasCase)
+            </th>
+            <th class="col-md-1">
+                @Html.DisplayNameFor(model => model.HasManual)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.HasAccessory)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
+                </th>*@
+
+            <th class="col-md-1">
+                @Html.DisplayNameFor(model => model.GameOwner.GameOwnerName)
+            </th>
+            <th class="col-md-2">Actions</th>
+        </tr>
+
+    </thead>
+    @*<tfoot>
+            <tr>
+                <th class="col-md-2">
+
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Platform.PlatformName)
+                </th>
+                <th class="col-md-2">
+
+                    @Html.DisplayNameFor(model => model.ModelName)
+                </th>
+                <th class="col-md-1">
+
+                    @Html.DisplayNameFor(model => model.GameRegion.GameRegionName)
+                </th>
+                <th class="col-md-1">
+                    @Html.DisplayNameFor(model => model.HasCase)
+                </th>
+                <th class="col-md-1">
+                    @Html.DisplayNameFor(model => model.HasManual)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.HasAccessory)
+                    </th>
+                th>
+                        @Html.DisplayNameFor(model => model.Notes)
+                    </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
+                    </th>
+
+                <th class="col-md-1">
+                    @Html.DisplayNameFor(model => model.GameOwner.GameOwnerName)
+                </th>
+                <th class="col-md-2">Actions</th>
+            </tr>
+
+        </tfoot>*@
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td class="col-md-3">
+                    @Html.DisplayFor(modelItem => item.Platform.PlatformName)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.ModelName)
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.GameRegion.GameRegionName)
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.HasCase)
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.HasManual)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.HasAccessory)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.GameCompany.GameCompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GameCompany1.GameCompanyName)
+                    </td>*@
+
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.GameOwner.GameOwnerName)
+                </td>
+                <td class="col-md-2">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GameId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GameId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GameId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $("#GamesTable").DataTable();
+</script>

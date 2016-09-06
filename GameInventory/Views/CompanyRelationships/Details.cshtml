@@ -1,0 +1,42 @@
+﻿@model GameInventory.CompanyRelationship
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CompanyRelationship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany.GameCompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany1.GameCompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyRelationshipType.CompanyRelationshipTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyRelationshipType.CompanyRelationshipTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyRelationshipId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

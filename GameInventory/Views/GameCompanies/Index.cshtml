@@ -1,0 +1,47 @@
+﻿@model IEnumerable<GameInventory.GameCompany>
+
+@{
+    ViewBag.Title = "Companies";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+<h2>Companies</h2>
+<h4>Total: @Model.Count()</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="CompanyTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GameCompanyName)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameCompanyName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GameCompanyId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GameCompanyId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GameCompanyId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $("#CompanyTable").DataTable();
+</script>

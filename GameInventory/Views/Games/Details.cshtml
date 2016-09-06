@@ -1,0 +1,106 @@
+﻿@model GameInventory.Game
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Game</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasCase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasCase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasManual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasManual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasAccessory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasAccessory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany.GameCompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany1.GameCompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameRegion.GameRegionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameRegion.GameRegionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Platform.PlatformName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Platform.PlatformName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameOwner.GameOwnerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameOwner.GameOwnerName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GameId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GameInventory.Games_SelectAllForDeveloper_Result>
+
+<table id="DevelopedTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th class="col-md-3">
+                Title
+            </th>
+            <th class="col-md-3">
+                Platform
+            </th>
+            <th class="col-md-2">
+                Publisher
+            </th>
+            <th class="col-md-2">
+                Model #
+            </th>
+            <th class="col-md-1">
+                Region
+            </th>
+            <th class="col-md-1">
+                Case?
+            </th>
+            <th class="col-md-1">
+                Manual?
+            </th>
+            <th class="col-md-1">
+                Owner
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-3">
+                    @Html.ActionLink(item.Title, "Details", "Games", new { id = item.GameId }, null)
+                </td>
+                <td class="col-md-3">
+                    @Html.ActionLink(item.PlatformName, "Details", "Platforms", new { id = item.PlatformId }, null)
+                </td>
+                <td class="col-md-2">
+                    @Html.ActionLink(item.PublisherName, "Details", new { id = item.PublisherId })
+                </td>
+                <td class="col-md-2">
+                    @item.ModelName
+                </td>
+                <td class="col-md-1">
+                    @Html.ActionLink(item.RegionName, "Details", "GameRegions", new { id = item.RegionId }, null)
+                </td>
+                <td class="col-md-1">
+                    @item.HasCase
+                </td>
+                <td class="col-md-1">
+                    @item.HasManual
+                </td>
+                <td class="col-md-1">
+                    @Html.ActionLink(item.OwnerName, "Details", "GameOwners", new { id = item.OwnerId }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

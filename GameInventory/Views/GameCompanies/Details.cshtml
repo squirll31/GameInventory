@@ -1,0 +1,50 @@
+﻿@model GameInventory.GameCompany
+
+@{
+    ViewBag.Title = Model.GameCompanyName + " - Details";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+
+<h2>@Model.GameCompanyName</h2>
+
+<div>
+    <h4>Company Information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompanyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GameCompanyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div>
+    <hr />
+    <h4>Games Developed By @Model.GameCompanyName</h4>
+    <h5>Total: @ViewBag.DeveloperSearchResults.Count</h5>
+
+    @Html.Partial("DevelopedList", (List<Games_SelectAllForDeveloper_Result>)ViewBag.DeveloperSearchResults)
+</div>
+<div>
+    <hr />
+    <h4>Games Published By @Model.GameCompanyName</h4>
+    <h5>Total: @ViewBag.PublisherSearchResults.Count</h5>
+
+    @Html.Partial("PublishedList", (List<Games_SelectAllForPublisher_Result>)ViewBag.PublisherSearchResults)
+</div>
+
+<script type="text/javascript">
+    $("#PlatformTable").DataTable();
+    $("#DevelopedTable").DataTable();
+    $("#PublishedTable").DataTable();
+</script>

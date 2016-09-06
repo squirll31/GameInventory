@@ -1,0 +1,1137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GameInventoryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyRelationships">
+          <Key>
+            <PropertyRef Name="CompanyRelationshipId" />
+          </Key>
+          <Property Name="CompanyRelationshipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyRelationshipTypeId" Type="int" />
+          <Property Name="FromCompany" Type="int" />
+          <Property Name="ToCompany" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyRelationshipTypes">
+          <Key>
+            <PropertyRef Name="CompanyRelationshipTypeId" />
+          </Key>
+          <Property Name="CompanyRelationshipTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyRelationshipTypeName" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GameCompanies">
+          <Key>
+            <PropertyRef Name="GameCompanyId" />
+          </Key>
+          <Property Name="GameCompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameCompanyName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GameOwners">
+          <Key>
+            <PropertyRef Name="GameOwnerId" />
+          </Key>
+          <Property Name="GameOwnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameOwnerName" Type="varchar" MaxLength="255" />
+          <Property Name="OwnerUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="GameRegions">
+          <Key>
+            <PropertyRef Name="GameRegionId" />
+          </Key>
+          <Property Name="GameRegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameRegionName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlatformId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" />
+          <Property Name="DeveloperId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="PublisherId" Type="int" />
+          <Property Name="HasCase" Type="bit" />
+          <Property Name="HasManual" Type="bit" />
+          <Property Name="ModelName" Type="varchar" MaxLength="255" />
+          <Property Name="HasAccessory" Type="bit" />
+          <Property Name="OwnerId" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="GamesForGameDevViews">
+          <Key>
+            <PropertyRef Name="GameDeveloper" />
+          </Key>
+          <Property Name="GameDeveloper" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GameCount" Type="int" />
+        </EntityType>
+        <EntityType Name="GamesForGamePubViews">
+          <Key>
+            <PropertyRef Name="GameDeveloper" />
+          </Key>
+          <Property Name="GameDeveloper" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="GameCount" Type="int" />
+        </EntityType>
+        <EntityType Name="Platforms">
+          <Key>
+            <PropertyRef Name="PlatformId" />
+          </Key>
+          <Property Name="PlatformId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlatformName" Type="varchar" MaxLength="255" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory.dbo.RecentGames' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RecentGames">
+          <Key>
+            <PropertyRef Name="GameId" />
+            <PropertyRef Name="PlatformId" />
+          </Key>
+          <Property Name="GameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlatformId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" />
+          <Property Name="DeveloperId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="PublisherId" Type="int" />
+          <Property Name="HasCase" Type="bit" />
+          <Property Name="HasManual" Type="bit" />
+          <Property Name="ModelName" Type="varchar" MaxLength="255" />
+          <Property Name="HasAccessory" Type="bit" />
+          <Property Name="OwnerId" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <Association Name="FK_CompanyRelationship_ToFromCompany">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
+          <End Role="CompanyRelationships" Type="Self.CompanyRelationships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="CompanyRelationships">
+              <PropertyRef Name="FromCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyRelationship_ToToCompany">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
+          <End Role="CompanyRelationships" Type="Self.CompanyRelationships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="CompanyRelationships">
+              <PropertyRef Name="ToCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyRelationships_ToCompanyRelationshipTypes">
+          <End Role="CompanyRelationshipTypes" Type="Self.CompanyRelationshipTypes" Multiplicity="0..1" />
+          <End Role="CompanyRelationships" Type="Self.CompanyRelationships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyRelationshipTypes">
+              <PropertyRef Name="CompanyRelationshipTypeId" />
+            </Principal>
+            <Dependent Role="CompanyRelationships">
+              <PropertyRef Name="CompanyRelationshipTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGameDevCompany">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="DeveloperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGameOwners">
+          <End Role="GameOwners" Type="Self.GameOwners" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameOwners">
+              <PropertyRef Name="GameOwnerId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGamePubCompany">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGameRegions">
+          <End Role="GameRegions" Type="Self.GameRegions" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameRegions">
+              <PropertyRef Name="GameRegionId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToPlatforms">
+          <End Role="Platforms" Type="Self.Platforms" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platforms">
+              <PropertyRef Name="PlatformId" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platforms_ToGameCompanies">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="1" />
+          <End Role="Platforms" Type="Self.Platforms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="Platforms">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Games_SelectAllByPlatform" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="platformId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Games_SelectAllForDeveloper" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Games_SelectAllForPublisher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="companyId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="GameInventoryDBModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyRelationships" EntityType="Self.CompanyRelationships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyRelationshipTypes" EntityType="Self.CompanyRelationshipTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameCompanies" EntityType="Self.GameCompanies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameOwners" EntityType="Self.GameOwners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GameRegions" EntityType="Self.GameRegions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GamesForGameDevViews" EntityType="Self.GamesForGameDevViews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GamesForGamePubViews" EntityType="Self.GamesForGamePubViews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Platforms" EntityType="Self.Platforms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecentGames" EntityType="Self.RecentGames" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RecentGames].[GameId] AS [GameId], 
+    [RecentGames].[PlatformId] AS [PlatformId], 
+    [RecentGames].[Title] AS [Title], 
+    [RecentGames].[DeveloperId] AS [DeveloperId], 
+    [RecentGames].[RegionId] AS [RegionId], 
+    [RecentGames].[PublisherId] AS [PublisherId], 
+    [RecentGames].[HasCase] AS [HasCase], 
+    [RecentGames].[HasManual] AS [HasManual], 
+    [RecentGames].[ModelName] AS [ModelName], 
+    [RecentGames].[HasAccessory] AS [HasAccessory], 
+    [RecentGames].[OwnerId] AS [OwnerId], 
+    [RecentGames].[Notes] AS [Notes]
+    FROM [dbo].[RecentGames] AS [RecentGames]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CompanyRelationship_ToFromCompany" Association="Self.FK_CompanyRelationship_ToFromCompany">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="CompanyRelationships" EntitySet="CompanyRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyRelationship_ToToCompany" Association="Self.FK_CompanyRelationship_ToToCompany">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="CompanyRelationships" EntitySet="CompanyRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyRelationships_ToCompanyRelationshipTypes" Association="Self.FK_CompanyRelationships_ToCompanyRelationshipTypes">
+            <End Role="CompanyRelationshipTypes" EntitySet="CompanyRelationshipTypes" />
+            <End Role="CompanyRelationships" EntitySet="CompanyRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGameDevCompany" Association="Self.FK_Games_ToGameDevCompany">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGameOwners" Association="Self.FK_Games_ToGameOwners">
+            <End Role="GameOwners" EntitySet="GameOwners" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGamePubCompany" Association="Self.FK_Games_ToGamePubCompany">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGameRegions" Association="Self.FK_Games_ToGameRegions">
+            <End Role="GameRegions" EntitySet="GameRegions" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToPlatforms" Association="Self.FK_Games_ToPlatforms">
+            <End Role="Platforms" EntitySet="Platforms" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platforms_ToGameCompanies" Association="Self.FK_Platforms_ToGameCompanies">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="Platforms" EntitySet="Platforms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GameInventoryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GameInventoryDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="GameInventoryDBModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="GameInventoryDBModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="GameInventoryDBModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="GameInventoryDBModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="GameInventoryDBModel.AspNetUser" />
+          <EntitySet Name="CompanyRelationships" EntityType="GameInventoryDBModel.CompanyRelationship" />
+          <EntitySet Name="CompanyRelationshipTypes" EntityType="GameInventoryDBModel.CompanyRelationshipType" />
+          <EntitySet Name="GameCompanies" EntityType="GameInventoryDBModel.GameCompany" />
+          <EntitySet Name="GameOwners" EntityType="GameInventoryDBModel.GameOwner" />
+          <EntitySet Name="GameRegions" EntityType="GameInventoryDBModel.GameRegion" />
+          <EntitySet Name="Games" EntityType="GameInventoryDBModel.Game" />
+          <EntitySet Name="GamesForGameDevViews" EntityType="GameInventoryDBModel.GamesForGameDevView" />
+          <EntitySet Name="GamesForGamePubViews" EntityType="GameInventoryDBModel.GamesForGamePubView" />
+          <EntitySet Name="Platforms" EntityType="GameInventoryDBModel.Platform" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="GameInventoryDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="GameInventoryDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyRelationship_ToFromCompany" Association="GameInventoryDBModel.FK_CompanyRelationship_ToFromCompany">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="CompanyRelationship" EntitySet="CompanyRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyRelationship_ToToCompany" Association="GameInventoryDBModel.FK_CompanyRelationship_ToToCompany">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="CompanyRelationship" EntitySet="CompanyRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyRelationships_ToCompanyRelationshipTypes" Association="GameInventoryDBModel.FK_CompanyRelationships_ToCompanyRelationshipTypes">
+            <End Role="CompanyRelationshipType" EntitySet="CompanyRelationshipTypes" />
+            <End Role="CompanyRelationship" EntitySet="CompanyRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGameDevCompany" Association="GameInventoryDBModel.FK_Games_ToGameDevCompany">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGamePubCompany" Association="GameInventoryDBModel.FK_Games_ToGamePubCompany">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Platforms_ToGameCompanies" Association="GameInventoryDBModel.FK_Platforms_ToGameCompanies">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="Platform" EntitySet="Platforms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGameOwners" Association="GameInventoryDBModel.FK_Games_ToGameOwners">
+            <End Role="GameOwner" EntitySet="GameOwners" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToGameRegions" Association="GameInventoryDBModel.FK_Games_ToGameRegions">
+            <End Role="GameRegion" EntitySet="GameRegions" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_ToPlatforms" Association="GameInventoryDBModel.FK_Games_ToPlatforms">
+            <End Role="Platform" EntitySet="Platforms" />
+            <End Role="Game" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="GameInventoryDBModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <FunctionImport Name="Games_SelectAllByPlatform" ReturnType="Collection(GameInventoryDBModel.Games_SelectAllByPlatform_Result)">
+          <Parameter Name="platformId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Games_SelectAllForDeveloper" ReturnType="Collection(GameInventoryDBModel.Games_SelectAllForDeveloper_Result)">
+          <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Games_SelectAllForPublisher" ReturnType="Collection(GameInventoryDBModel.Games_SelectAllForPublisher_Result)">
+          <Parameter Name="companyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="RecentGames" EntityType="GameInventoryDBModel.RecentGame" />
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="GameInventoryDBModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="GameInventoryDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="GameInventoryDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="GameInventoryDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="GameInventoryDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="GameInventoryDBModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="CompanyRelationship">
+          <Key>
+            <PropertyRef Name="CompanyRelationshipId" />
+          </Key>
+          <Property Name="CompanyRelationshipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyRelationshipTypeId" Type="Int32" />
+          <Property Name="FromCompany" Type="Int32" />
+          <Property Name="ToCompany" Type="Int32" />
+          <NavigationProperty Name="GameCompany" Relationship="GameInventoryDBModel.FK_CompanyRelationship_ToFromCompany" FromRole="CompanyRelationship" ToRole="GameCompany" />
+          <NavigationProperty Name="GameCompany1" Relationship="GameInventoryDBModel.FK_CompanyRelationship_ToToCompany" FromRole="CompanyRelationship" ToRole="GameCompany" />
+          <NavigationProperty Name="CompanyRelationshipType" Relationship="GameInventoryDBModel.FK_CompanyRelationships_ToCompanyRelationshipTypes" FromRole="CompanyRelationship" ToRole="CompanyRelationshipType" />
+        </EntityType>
+        <EntityType Name="CompanyRelationshipType">
+          <Key>
+            <PropertyRef Name="CompanyRelationshipTypeId" />
+          </Key>
+          <Property Name="CompanyRelationshipTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyRelationshipTypeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CompanyRelationships" Relationship="GameInventoryDBModel.FK_CompanyRelationships_ToCompanyRelationshipTypes" FromRole="CompanyRelationshipType" ToRole="CompanyRelationship" />
+        </EntityType>
+        <EntityType Name="GameCompany">
+          <Key>
+            <PropertyRef Name="GameCompanyId" />
+          </Key>
+          <Property Name="GameCompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameCompanyName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CompanyRelationships" Relationship="GameInventoryDBModel.FK_CompanyRelationship_ToFromCompany" FromRole="GameCompany" ToRole="CompanyRelationship" />
+          <NavigationProperty Name="CompanyRelationships1" Relationship="GameInventoryDBModel.FK_CompanyRelationship_ToToCompany" FromRole="GameCompany" ToRole="CompanyRelationship" />
+          <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToGameDevCompany" FromRole="GameCompany" ToRole="Game" />
+          <NavigationProperty Name="Games1" Relationship="GameInventoryDBModel.FK_Games_ToGamePubCompany" FromRole="GameCompany" ToRole="Game" />
+          <NavigationProperty Name="Platforms" Relationship="GameInventoryDBModel.FK_Platforms_ToGameCompanies" FromRole="GameCompany" ToRole="Platform" />
+        </EntityType>
+        <EntityType Name="GameOwner">
+          <Key>
+            <PropertyRef Name="GameOwnerId" />
+          </Key>
+          <Property Name="GameOwnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameOwnerName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OwnerUserId" Type="Int32" />
+          <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToGameOwners" FromRole="GameOwner" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="GameRegion">
+          <Key>
+            <PropertyRef Name="GameRegionId" />
+          </Key>
+          <Property Name="GameRegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameRegionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToGameRegions" FromRole="GameRegion" ToRole="Game" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlatformId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DeveloperId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="PublisherId" Type="Int32" />
+          <Property Name="HasCase" Type="Boolean" />
+          <Property Name="HasManual" Type="Boolean" />
+          <Property Name="ModelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HasAccessory" Type="Boolean" />
+          <Property Name="OwnerId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GameCompany" Relationship="GameInventoryDBModel.FK_Games_ToGameDevCompany" FromRole="Game" ToRole="GameCompany" />
+          <NavigationProperty Name="GameCompany1" Relationship="GameInventoryDBModel.FK_Games_ToGamePubCompany" FromRole="Game" ToRole="GameCompany" />
+          <NavigationProperty Name="GameOwner" Relationship="GameInventoryDBModel.FK_Games_ToGameOwners" FromRole="Game" ToRole="GameOwner" />
+          <NavigationProperty Name="GameRegion" Relationship="GameInventoryDBModel.FK_Games_ToGameRegions" FromRole="Game" ToRole="GameRegion" />
+          <NavigationProperty Name="Platform" Relationship="GameInventoryDBModel.FK_Games_ToPlatforms" FromRole="Game" ToRole="Platform" />
+        </EntityType>
+        <EntityType Name="GamesForGameDevView">
+          <Key>
+            <PropertyRef Name="GameDeveloper" />
+          </Key>
+          <Property Name="GameDeveloper" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GameCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="GamesForGamePubView">
+          <Key>
+            <PropertyRef Name="GameDeveloper" />
+          </Key>
+          <Property Name="GameDeveloper" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GameCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Platform">
+          <Key>
+            <PropertyRef Name="PlatformId" />
+          </Key>
+          <Property Name="PlatformId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlatformName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GameCompany" Relationship="GameInventoryDBModel.FK_Platforms_ToGameCompanies" FromRole="Platform" ToRole="GameCompany" />
+          <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToPlatforms" FromRole="Platform" ToRole="Game" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="GameInventoryDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GameInventoryDBModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="GameInventoryDBModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GameInventoryDBModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyRelationship_ToFromCompany">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.CompanyRelationship" Role="CompanyRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="CompanyRelationship">
+              <PropertyRef Name="FromCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyRelationship_ToToCompany">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.CompanyRelationship" Role="CompanyRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="CompanyRelationship">
+              <PropertyRef Name="ToCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyRelationships_ToCompanyRelationshipTypes">
+          <End Type="GameInventoryDBModel.CompanyRelationshipType" Role="CompanyRelationshipType" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.CompanyRelationship" Role="CompanyRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyRelationshipType">
+              <PropertyRef Name="CompanyRelationshipTypeId" />
+            </Principal>
+            <Dependent Role="CompanyRelationship">
+              <PropertyRef Name="CompanyRelationshipTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGameDevCompany">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="DeveloperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGamePubCompany">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Platforms_ToGameCompanies">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="1" />
+          <End Type="GameInventoryDBModel.Platform" Role="Platform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="Platform">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGameOwners">
+          <End Type="GameInventoryDBModel.GameOwner" Role="GameOwner" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameOwner">
+              <PropertyRef Name="GameOwnerId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToGameRegions">
+          <End Type="GameInventoryDBModel.GameRegion" Role="GameRegion" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameRegion">
+              <PropertyRef Name="GameRegionId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_ToPlatforms">
+          <End Type="GameInventoryDBModel.Platform" Role="Platform" Multiplicity="1" />
+          <End Type="GameInventoryDBModel.Game" Role="Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="PlatformId" />
+            </Principal>
+            <Dependent Role="Game">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="GameInventoryDBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="GameInventoryDBModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="Games_SelectAllByPlatform_Result">
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int32" Name="DeveloperId" Nullable="true" />
+          <Property Type="String" Name="DeveloperName" Nullable="false" MaxLength="255" />
+          <Property Type="Boolean" Name="HasAccessory" Nullable="true" />
+          <Property Type="Boolean" Name="HasCase" Nullable="true" />
+          <Property Type="Boolean" Name="HasManual" Nullable="true" />
+          <Property Type="String" Name="ModelName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int32" Name="OwnerId" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PlatformId" Nullable="false" />
+          <Property Type="String" Name="PlatformName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PublisherId" Nullable="true" />
+          <Property Type="String" Name="PublisherName" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="RegionId" Nullable="true" />
+          <Property Type="String" Name="RegionName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Games_SelectAllForDeveloper_Result">
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int32" Name="DeveloperId" Nullable="true" />
+          <Property Type="String" Name="DeveloperName" Nullable="false" MaxLength="255" />
+          <Property Type="Boolean" Name="HasAccessory" Nullable="true" />
+          <Property Type="Boolean" Name="HasCase" Nullable="true" />
+          <Property Type="Boolean" Name="HasManual" Nullable="true" />
+          <Property Type="String" Name="ModelName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int32" Name="OwnerId" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PlatformId" Nullable="false" />
+          <Property Type="String" Name="PlatformName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PublisherId" Nullable="true" />
+          <Property Type="String" Name="PublisherName" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="RegionId" Nullable="true" />
+          <Property Type="String" Name="RegionName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="Games_SelectAllForPublisher_Result">
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int32" Name="DeveloperId" Nullable="true" />
+          <Property Type="String" Name="DeveloperName" Nullable="false" MaxLength="255" />
+          <Property Type="Boolean" Name="HasAccessory" Nullable="true" />
+          <Property Type="Boolean" Name="HasCase" Nullable="true" />
+          <Property Type="Boolean" Name="HasManual" Nullable="true" />
+          <Property Type="String" Name="ModelName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="Int32" Name="OwnerId" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PlatformId" Nullable="false" />
+          <Property Type="String" Name="PlatformName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PublisherId" Nullable="true" />
+          <Property Type="String" Name="PublisherName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="RegionId" Nullable="true" />
+          <Property Type="String" Name="RegionName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <EntityType Name="RecentGame">
+          <Key>
+            <PropertyRef Name="GameId" />
+            <PropertyRef Name="PlatformId" />
+          </Key>
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlatformId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DeveloperId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="PublisherId" Type="Int32" />
+          <Property Name="HasCase" Type="Boolean" />
+          <Property Name="HasManual" Type="Boolean" />
+          <Property Name="ModelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HasAccessory" Type="Boolean" />
+          <Property Name="OwnerId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GameInventoryDBModelStoreContainer" CdmEntityContainer="GameInventoryDBEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyRelationships">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.CompanyRelationship">
+              <MappingFragment StoreEntitySet="CompanyRelationships">
+                <ScalarProperty Name="ToCompany" ColumnName="ToCompany" />
+                <ScalarProperty Name="FromCompany" ColumnName="FromCompany" />
+                <ScalarProperty Name="CompanyRelationshipTypeId" ColumnName="CompanyRelationshipTypeId" />
+                <ScalarProperty Name="CompanyRelationshipId" ColumnName="CompanyRelationshipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyRelationshipTypes">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.CompanyRelationshipType">
+              <MappingFragment StoreEntitySet="CompanyRelationshipTypes">
+                <ScalarProperty Name="CompanyRelationshipTypeName" ColumnName="CompanyRelationshipTypeName" />
+                <ScalarProperty Name="CompanyRelationshipTypeId" ColumnName="CompanyRelationshipTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameCompanies">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.GameCompany">
+              <MappingFragment StoreEntitySet="GameCompanies">
+                <ScalarProperty Name="GameCompanyName" ColumnName="GameCompanyName" />
+                <ScalarProperty Name="GameCompanyId" ColumnName="GameCompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameOwners">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.GameOwner">
+              <MappingFragment StoreEntitySet="GameOwners">
+                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+                <ScalarProperty Name="GameOwnerName" ColumnName="GameOwnerName" />
+                <ScalarProperty Name="GameOwnerId" ColumnName="GameOwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameRegions">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.GameRegion">
+              <MappingFragment StoreEntitySet="GameRegions">
+                <ScalarProperty Name="GameRegionName" ColumnName="GameRegionName" />
+                <ScalarProperty Name="GameRegionId" ColumnName="GameRegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GamesForGameDevViews">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.GamesForGameDevView">
+              <MappingFragment StoreEntitySet="GamesForGameDevViews">
+                <ScalarProperty Name="GameCount" ColumnName="GameCount" />
+                <ScalarProperty Name="GameDeveloper" ColumnName="GameDeveloper" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GamesForGamePubViews">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.GamesForGamePubView">
+              <MappingFragment StoreEntitySet="GamesForGamePubViews">
+                <ScalarProperty Name="GameCount" ColumnName="GameCount" />
+                <ScalarProperty Name="GameDeveloper" ColumnName="GameDeveloper" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platforms">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.Platform">
+              <MappingFragment StoreEntitySet="Platforms">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="GameInventoryDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Games_SelectAllByPlatform" FunctionName="GameInventoryDBModel.Store.Games_SelectAllByPlatform">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.Games_SelectAllByPlatform_Result">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="PublisherName" ColumnName="PublisherName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Games_SelectAllForDeveloper" FunctionName="GameInventoryDBModel.Store.Games_SelectAllForDeveloper">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.Games_SelectAllForDeveloper_Result">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="PublisherName" ColumnName="PublisherName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Games_SelectAllForPublisher" FunctionName="GameInventoryDBModel.Store.Games_SelectAllForPublisher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.Games_SelectAllForPublisher_Result">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="DeveloperName" ColumnName="DeveloperName" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="PublisherName" ColumnName="PublisherName" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="RecentGames">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.RecentGame">
+              <MappingFragment StoreEntitySet="RecentGames">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

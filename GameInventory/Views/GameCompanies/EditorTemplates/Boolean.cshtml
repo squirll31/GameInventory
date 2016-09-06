@@ -1,0 +1,28 @@
+﻿@model Boolean?
+
+@{ 
+    List<SelectListItem> Selections = new List<SelectListItem>();
+    if (Model.HasValue)
+    {
+        if (Model.Value)
+        {
+            Selections.Add(new SelectListItem { Text = "", Value = null });
+            Selections.Add(new SelectListItem { Text = "True", Value = true.ToString(), Selected = true });
+            Selections.Add(new SelectListItem { Text = "False", Value = false.ToString() });
+        }
+        else
+        {
+            Selections.Add(new SelectListItem { Text = "", Value = null });
+            Selections.Add(new SelectListItem { Text = "True", Value = true.ToString() });
+            Selections.Add(new SelectListItem { Text = "False", Value = false.ToString(), Selected = true });
+        }
+    }
+    else
+    {
+        Selections.Add(new SelectListItem { Text = "", Value = null, Selected = true });
+        Selections.Add(new SelectListItem { Text = "True", Value = true.ToString() });
+        Selections.Add(new SelectListItem { Text = "False", Value = false.ToString() });
+    }
+}
+@Html.DropDownList("", Selections, new { @class = "form-control" })
+

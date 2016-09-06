@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GameInventory.GameOwner>
+
+@{
+    ViewBag.Title = "Game Owners";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/datatables.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
+<h2>Game Owners</h2>
+<h4>Total: @Model.Count()</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="OwnerTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GameOwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerUserId)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameOwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerUserId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GameOwnerId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.GameOwnerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GameOwnerId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $("#OwnerTable").DataTable();
+</script>
+

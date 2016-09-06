@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="600af188f8be4a06a096dc37a30f8c42" Name="Diagram1" ZoomLevel="53">
+        <EntityTypeShape EntityType="GameInventoryDBModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.AspNetRole" Width="1.5" PointX="5.75" PointY="2.5" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="1" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="3.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.AspNetUser" Width="1.5" PointX="8" PointY="1.375" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.CompanyRelationship" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.CompanyRelationshipType" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GameCompany" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GameOwner" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GameRegion" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.Game" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GamesForGameDevView" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GamesForGamePubView" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.Platform" Width="1.5" PointX="3" PointY="13.5" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_CompanyRelationship_ToFromCompany" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_CompanyRelationship_ToToCompany" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_CompanyRelationships_ToCompanyRelationshipTypes" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToGameDevCompany" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToGamePubCompany" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_Platforms_ToGameCompanies" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToGameOwners" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToGameRegions" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToPlatforms" />
+        <AssociationConnector Association="GameInventoryDBModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.RecentGame" Width="1.5" PointX="12.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿@model GameInventory.CompanyRelationship
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CompanyRelationship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany.GameCompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameCompany1.GameCompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyRelationshipType.CompanyRelationshipTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyRelationshipType.CompanyRelationshipTypeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

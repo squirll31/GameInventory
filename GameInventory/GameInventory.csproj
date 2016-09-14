@@ -286,6 +286,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DigitalGame.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameCollection.cs" />
+    <Compile Include="Models\GameCompany.cs" />
+    <Compile Include="Models\PhysicalGame.cs" />
+    <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\RecentGamesViewModel.cs" />
     <Compile Include="Models\PlatformViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -370,6 +376,7 @@
     <Content Include="Content\Bootstrap-3.3.6\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Bootstrap-3.3.6\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Bootstrap-3.3.6\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\Localdb.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

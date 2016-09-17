@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace GameInventory.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Platform
     {
         public Platform()
@@ -13,19 +15,30 @@ namespace GameInventory.Models
             Games = new HashSet<Game>();
             Developer = new GameCompany();
             Publisher = new GameCompany();
-            GameCompany = new GameCompany();
             PlatformName = "";
             PlatformId = 0;
             CompanyId = 0;
         }
 
+        [JsonProperty]
         public int PlatformId { get; set; }
+
+        [JsonProperty]
         public string PlatformName { get; set; }
+
+        [JsonProperty]
         public int CompanyId { get; set; }
         public ICollection<Game> Games { get; set; }
+
+        [JsonProperty]
         public GameCompany Developer { get; set; }
+
+        [JsonProperty]
         public GameCompany Publisher { get; set; }
+
+        [JsonProperty]
         public GameCompany GameCompany { get; set; }
+
         public override string ToString()
         {
             StringBuilder s = new StringBuilder();

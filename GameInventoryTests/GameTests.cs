@@ -20,10 +20,29 @@ namespace GameInventoryTests
             foreach (var g in gc)
             {
                 string seralized = JsonConvert.SerializeObject(g, Formatting.Indented);
-                Console.WriteLine("Seralized object:\n{0}", seralized);
+                Console.WriteLine("Serialized object:\n{0}", seralized);
             }
         }
 
+        [TestMethod]
+        public void SeralizeGameCollectionGameTest()
+        {
+            var gc = GITestUtil.MakeGameCollection();
+            string seralized = JsonConvert.SerializeObject(gc, Formatting.Indented);
+            Console.WriteLine("Serialized object:\n{0}", seralized);
+        }
+
+
+        [TestMethod]
+        public void SerializeDeserializeGameTest()
+        {
+
+            var gc = GITestUtil.MakeGameCollection();
+            string seralized = JsonConvert.SerializeObject(gc, Formatting.Indented);
+            Console.WriteLine("Serialized object:\n{0}", seralized);
+            var gcDes = JsonConvert.DeserializeObject<GameCollectionGame>(seralized);
+            Console.WriteLine("(gcPre == gcPost) = {0}", (gc == gcDes));
+        }
 
         [TestMethod]
         public void TestGameCollectionDisplay()

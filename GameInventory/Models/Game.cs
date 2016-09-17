@@ -41,10 +41,8 @@ namespace GameInventory.Models
         [JsonProperty]
         public DateTime ReleaseDate { get; set; }
 
-        [JsonProperty]
         public int ReleaseYear { get { return ReleaseDate.Year; } }
 
-        [JsonProperty]
         public int ReleaseDecade { get { return ReleaseDate.Year % 10; } }
 
         [JsonProperty]

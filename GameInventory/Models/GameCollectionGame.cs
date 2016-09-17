@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace GameInventory.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class GameCollectionGame : Game, 
                                       IEnumerable<Game>, 
                                       ICollection<Game>
@@ -15,7 +17,7 @@ namespace GameInventory.Models
             GamesInCollection = new List<Game>();
         }
 
-        public string CollectionName { get; set; }
+        [JsonProperty]
         public ICollection<Game> GamesInCollection { get; set; }
 
         #region ICollection_Impl

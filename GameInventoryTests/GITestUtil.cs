@@ -11,30 +11,44 @@ namespace GameInventoryTests
     {
         public static GameCollectionGame MakeGameCollection()
         {
+
             List<Game> testGameList = new List<Game>();
+
+            GameCompany microsoft = new GameCompany { GameCompanyName = "Microsoft" };
+            GameCompany capcom = new GameCompany { GameCompanyName = "Capcom" };
+
+            Platform x360 = new Platform
+            {
+                Developer = microsoft,
+                Publisher = microsoft,
+                PlatformName = "Xbox 360"
+            };
 
             Game g1 = new PhysicalGame
             {
                 Title = "Resident Evil 6",
                 Box = false,
-                Platform = new Platform { PlatformName = "Xbox 360" },
-                Publishers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } },
-                Developers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } }
+                Manual = false,
+                Platform = x360,
+                Publishers = new List<GameCompany> { capcom },
+                Developers = new List<GameCompany> { capcom }
             };
+
             Game g2 = new PhysicalGame
             {
                 Title = "Dead Rising 2",
                 Box = false,
-                Platform = new Platform { PlatformName = "Xbox 360" },
-                Publishers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } },
-                Developers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } }
+                Manual = false,
+                Platform = x360,
+                Publishers = new List<GameCompany> { capcom },
+                Developers = new List<GameCompany> { capcom }
             };
             Game g3 = new DigitalGame
             {
                 Title = "Mega Man 10",
-                Platform = new Platform { PlatformName = "Xbox 360" },
-                Publishers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } },
-                Developers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } },
+                Platform = x360,
+                Publishers = new List<GameCompany> { capcom },
+                Developers = new List<GameCompany> { capcom },
                 Service = "Xbox Live"
             };
             testGameList.Add(g1);
@@ -45,8 +59,8 @@ namespace GameInventoryTests
             {
                 GamesInCollection = testGameList,
                 Title = "Capcom Classics Collection",
-                Publishers = new List<GameCompany> { new GameCompany { GameCompanyName = "Capcom" } },
-                Platform = new Platform { PlatformName = "Xbox 360" }
+                Publishers = new List<GameCompany> { capcom },
+                Platform = x360
             };
             return gc;
         }

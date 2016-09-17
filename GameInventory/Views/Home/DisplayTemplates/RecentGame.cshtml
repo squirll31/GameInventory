@@ -1,8 +1,49 @@
 ﻿@model GameInventory.RecentGame
 
 <tr>
-    <td class="col-md-2">@Model.Title</td>
-    <td class="col-md-2">@Model.PlatformId</td>
-    <td class="col-md-1">@Model.RegionId</td>
-    <td class="col-md-1">@Model.OwnerId</td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.DeveloperId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.RegionId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.PublisherId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.HasCase)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.HasManual)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.ModelName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.HasAccessory)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.OwnerId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Notes)
+    </td>
+    <td>
+        @Html.ActionLink("Edit",
+               "Edit",
+               "Games",
+               new { id = Model.GameId },
+               null 
+        )
+     <br/>
+        @Html.ActionLink("Details",
+               "Details",
+               "Games",
+               new { id = Model.GameId },
+               null
+        )
+    </td>
 </tr>

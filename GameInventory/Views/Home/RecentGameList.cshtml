@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GameInventory.RecentGame>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeveloperId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublisherId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasCase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasManual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasAccessory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    @Html.DisplayFor(modelItem => item)
+}
+
+</table>

@@ -120,6 +120,10 @@
           <Property Name="HasAccessory" Type="bit" />
           <Property Name="OwnerId" Type="int" />
           <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedUser" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="GamesForGameDevViews">
           <Key>
@@ -165,6 +169,24 @@ warning 6002: The table/view 'Inventory.dbo.RecentGames' does not have a primary
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RecentGamesView">
+          <Key>
+            <PropertyRef Name="GameId" />
+            <PropertyRef Name="PlatformId" />
+          </Key>
+          <Property Name="GameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlatformId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" />
+          <Property Name="DeveloperId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="PublisherId" Type="int" />
+          <Property Name="HasCase" Type="bit" />
+          <Property Name="HasManual" Type="bit" />
+          <Property Name="ModelName" Type="varchar" MaxLength="255" />
+          <Property Name="HasAccessory" Type="bit" />
+          <Property Name="OwnerId" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+        </EntityType>
         <Association Name="FK_CompanyRelationship_ToFromCompany">
           <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
           <End Role="CompanyRelationships" Type="Self.CompanyRelationships" Multiplicity="*" />
@@ -370,6 +392,22 @@ warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a pri
     [RecentGames].[Notes] AS [Notes]
     FROM [dbo].[RecentGames] AS [RecentGames]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="RecentGamesView" EntityType="Self.RecentGamesView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RecentGamesView].[GameId] AS [GameId], 
+    [RecentGamesView].[PlatformId] AS [PlatformId], 
+    [RecentGamesView].[Title] AS [Title], 
+    [RecentGamesView].[DeveloperId] AS [DeveloperId], 
+    [RecentGamesView].[RegionId] AS [RegionId], 
+    [RecentGamesView].[PublisherId] AS [PublisherId], 
+    [RecentGamesView].[HasCase] AS [HasCase], 
+    [RecentGamesView].[HasManual] AS [HasManual], 
+    [RecentGamesView].[ModelName] AS [ModelName], 
+    [RecentGamesView].[HasAccessory] AS [HasAccessory], 
+    [RecentGamesView].[OwnerId] AS [OwnerId], 
+    [RecentGamesView].[Notes] AS [Notes]
+    FROM [dbo].[RecentGamesView] AS [RecentGamesView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_CompanyRelationship_ToFromCompany" Association="Self.FK_CompanyRelationship_ToFromCompany">
             <End Role="GameCompanies" EntitySet="GameCompanies" />
             <End Role="CompanyRelationships" EntitySet="CompanyRelationships" />
@@ -500,6 +538,7 @@ warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a pri
           <Parameter Name="companyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="RecentGames" EntityType="GameInventoryDBModel.RecentGame" />
+          <EntitySet Name="RecentGamesViews" EntityType="GameInventoryDBModel.RecentGamesView" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -630,6 +669,10 @@ warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a pri
           <NavigationProperty Name="GameOwner" Relationship="GameInventoryDBModel.FK_Games_ToGameOwners" FromRole="Game" ToRole="GameOwner" />
           <NavigationProperty Name="GameRegion" Relationship="GameInventoryDBModel.FK_Games_ToGameRegions" FromRole="Game" ToRole="GameRegion" />
           <NavigationProperty Name="Platform" Relationship="GameInventoryDBModel.FK_Games_ToPlatforms" FromRole="Game" ToRole="Platform" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="GamesForGameDevView">
           <Key>
@@ -870,6 +913,24 @@ warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a pri
           <Property Name="OwnerId" Type="Int32" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="RecentGamesView">
+          <Key>
+            <PropertyRef Name="GameId" />
+            <PropertyRef Name="PlatformId" />
+          </Key>
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlatformId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DeveloperId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="PublisherId" Type="Int32" />
+          <Property Name="HasCase" Type="Boolean" />
+          <Property Name="HasManual" Type="Boolean" />
+          <Property Name="ModelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HasAccessory" Type="Boolean" />
+          <Property Name="OwnerId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -977,6 +1038,10 @@ warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a pri
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="GameInventoryDBModel.Game">
               <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
@@ -1097,6 +1162,24 @@ warning 6002: The table/view 'Inventory.dbo.RecentGamesView' does not have a pri
           <EntitySetMapping Name="RecentGames">
             <EntityTypeMapping TypeName="GameInventoryDBModel.RecentGame">
               <MappingFragment StoreEntitySet="RecentGames">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecentGamesViews">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.RecentGamesView">
+              <MappingFragment StoreEntitySet="RecentGamesView">
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />

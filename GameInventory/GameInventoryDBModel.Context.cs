@@ -42,6 +42,7 @@ namespace GameInventory
         public virtual DbSet<GamesForGamePubView> GamesForGamePubViews { get; set; }
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<RecentGame> RecentGames { get; set; }
+        public virtual DbSet<RecentGamesView> RecentGamesViews { get; set; }
     
         public virtual ObjectResult<Games_SelectAllByPlatform_Result> Games_SelectAllByPlatform(Nullable<int> platformId)
         {

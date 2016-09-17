@@ -14,8 +14,18 @@ namespace GameInventory.Controllers
         {
             GameInventoryDBEntities db = new GameInventoryDBEntities();
             RecentGamesViewModel rgv = new RecentGamesViewModel();
-            rgv.RecentGameList = new List<GameInventory.RecentGame>(db.RecentGames.ToList());
+            rgv.RecentGameList = new List<GameInventory.RecentGame>(db.RecentGames);
             return View(rgv);
+        }
+
+        public void RecentAsync()
+        {
+
+        }
+
+        public ActionResult RecentCompleted()
+        {
+            return View("");
         }
 
         public ActionResult About()

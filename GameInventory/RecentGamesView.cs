@@ -12,7 +12,7 @@ namespace GameInventory
     using System;
     using System.Collections.Generic;
     
-    public partial class Game
+    public partial class RecentGamesView
     {
         public int GameId { get; set; }
         public int PlatformId { get; set; }
@@ -26,15 +26,5 @@ namespace GameInventory
         public Nullable<bool> HasAccessory { get; set; }
         public Nullable<int> OwnerId { get; set; }
         public string Notes { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
-        public string UpdatedUser { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedUser { get; set; }
-    
-        public virtual GameCompany GameCompany { get; set; }
-        public virtual GameCompany GameCompany1 { get; set; }
-        public virtual GameOwner GameOwner { get; set; }
-        public virtual GameRegion GameRegion { get; set; }
-        public virtual Platform Platform { get; set; }
     }
 }

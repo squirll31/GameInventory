@@ -5,6 +5,6 @@ namespace GameInventory.Models
 {
     public class RecentGamesViewModel
     {
-        public IEnumerable<GameInventory.RecentGame> RecentGameList;
+        public List<GameInventory.RecentGame> RecentGameList;
     }
 }

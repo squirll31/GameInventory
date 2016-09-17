@@ -38,18 +38,7 @@
             <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.HasManual)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.HasAccessory)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Notes)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
-                </th>*@
+
 
             <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.GameOwner.GameOwnerName)
@@ -58,49 +47,7 @@
         </tr>
 
     </thead>
-    @*<tfoot>
-            <tr>
-                <th class="col-md-2">
 
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th class="col-md-2">
-                    @Html.DisplayNameFor(model => model.Platform.PlatformName)
-                </th>
-                <th class="col-md-2">
-
-                    @Html.DisplayNameFor(model => model.ModelName)
-                </th>
-                <th class="col-md-1">
-
-                    @Html.DisplayNameFor(model => model.GameRegion.GameRegionName)
-                </th>
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.HasCase)
-                </th>
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.HasManual)
-                </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.HasAccessory)
-                    </th>
-                th>
-                        @Html.DisplayNameFor(model => model.Notes)
-                    </th>
-                <th>
-                        @Html.DisplayNameFor(model => model.GameCompany.GameCompanyName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.GameCompany1.GameCompanyName)
-                    </th>
-
-                <th class="col-md-1">
-                    @Html.DisplayNameFor(model => model.GameOwner.GameOwnerName)
-                </th>
-                <th class="col-md-2">Actions</th>
-            </tr>
-
-        </tfoot>*@
     <tbody>
         @foreach (var item in Model)
         {
@@ -123,18 +70,6 @@
                 <td class="col-md-1">
                     @Html.DisplayFor(modelItem => item.HasManual)
                 </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.HasAccessory)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Notes)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.GameCompany.GameCompanyName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.GameCompany1.GameCompanyName)
-                    </td>*@
 
                 <td class="col-md-1">
                     @Html.DisplayFor(modelItem => item.GameOwner.GameOwnerName)

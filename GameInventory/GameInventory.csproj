@@ -288,7 +288,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DigitalGame.cs" />
     <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\GameCollection.cs" />
+    <Compile Include="Models\GameCollectionGame.cs" />
     <Compile Include="Models\GameCompany.cs" />
     <Compile Include="Models\PhysicalGame.cs" />
     <Compile Include="Models\Platform.cs" />

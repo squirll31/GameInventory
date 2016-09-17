@@ -3,26 +3,54 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace GameInventory.Models
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Game
     {
+        [JsonObject(MemberSerialization.OptIn)]
         public class GameAccessory
         {
+            [JsonProperty]
             public string AccessoryName;
         }
+
+        [JsonProperty]
         public int Id { get; set; }
+
+        [JsonProperty]
         public string Title { get; set; }
+
+        [JsonProperty]
         public ICollection<GameCompany> Publishers { get; set; }
+
+        [JsonProperty]
         public ICollection<GameCompany> Developers { get; set; }
+
+        [JsonProperty]
         public ICollection<string> AltTitles { get; set; }
+
+        [JsonProperty]
         public Platform Platform { get; set; }
+
+        [JsonProperty]
         public ICollection<GameAccessory> Accessories { get; set; }
+
+        [JsonProperty]
         public DateTime ReleaseDate { get; set; }
+
+        [JsonProperty]
         public int ReleaseYear { get { return ReleaseDate.Year; } }
+
+        [JsonProperty]
         public int ReleaseDecade { get { return ReleaseDate.Year % 10; } }
+
+        [JsonProperty]
         public ICollection<string> DLCs { get; set; }
+
+        [JsonProperty]
         public ICollection<string> Genres { get; set; }
 
         public override string ToString()

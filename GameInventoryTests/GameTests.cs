@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using GameInventory.Models;
 using GameInventoryTests;
+using Newtonsoft.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GameInventoryTests
@@ -10,6 +11,18 @@ namespace GameInventoryTests
     [TestClass]
     public class GameTests
     {
+
+
+        [TestMethod]
+        public void SerializeTest()
+        {
+            var gc = GITestUtil.MakeGameCollection();
+            foreach (var g in gc)
+            {
+                string seralized = JsonConvert.SerializeObject(g, Formatting.Indented);
+                Console.WriteLine("Seralized object:\n{0}", seralized);
+            }
+        }
 
 
         [TestMethod]

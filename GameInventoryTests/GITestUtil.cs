@@ -9,7 +9,7 @@ namespace GameInventoryTests
 {
     public  class GITestUtil
     {
-        public static GameCollectionGame MakeGameCollection()
+        public static GameCollectionGame MakeCapcomGameCollection()
         {
 
             List<Game> testGameList = new List<Game>();

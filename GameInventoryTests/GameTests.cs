@@ -11,12 +11,10 @@ namespace GameInventoryTests
     [TestClass]
     public class GameTests
     {
-
-
         [TestMethod]
         public void SerializeTest()
         {
-            var gc = GITestUtil.MakeGameCollection();
+            var gc = GITestUtil.MakeCapcomGameCollection();
             foreach (var g in gc)
             {
                 string seralized = JsonConvert.SerializeObject(g, Formatting.Indented);
@@ -27,27 +25,71 @@ namespace GameInventoryTests
         [TestMethod]
         public void SeralizeGameCollectionGameTest()
         {
-            var gc = GITestUtil.MakeGameCollection();
+            var gc = GITestUtil.MakeCapcomGameCollection();
             string seralized = JsonConvert.SerializeObject(gc, Formatting.Indented);
             Console.WriteLine("Serialized object:\n{0}", seralized);
         }
 
+        [TestMethod]
+        public void DescTest()
+        {
+
+            GameCollectionGame gc = GITestUtil.MakeCapcomGameCollection();
+            string seralized = JsonConvert.SerializeObject(gc, Formatting.Indented);
+            GameCollectionGame gcDes = JsonConvert.DeserializeObject<GameCollectionGame>(seralized);
+            for (int x = 0; x < gc.Count; x++)
+            {
+                Console.WriteLine("{0} : {1} - {2}", gc.ElementAt(x).GetType(),
+                                                 gcDes.ElementAt(x).GetType(),
+                                                 gc);
+            }
+        }
 
         [TestMethod]
         public void SerializeDeserializeGameTest()
         {
 
-            var gc = GITestUtil.MakeGameCollection();
+            GameCollectionGame gc = GITestUtil.MakeCapcomGameCollection();
             string seralized = JsonConvert.SerializeObject(gc, Formatting.Indented);
             Console.WriteLine("Serialized object:\n{0}", seralized);
-            var gcDes = JsonConvert.DeserializeObject<GameCollectionGame>(seralized);
-            Console.WriteLine("(gcPre == gcPost) = {0}", (gc == gcDes));
+            GameCollectionGame gcDes = JsonConvert.DeserializeObject<GameCollectionGame>(seralized);
+            Console.WriteLine(gc);
+            Console.WriteLine(gcDes);
+
+            //var s = gcDes.Where(e => e.GetType() == typeof(PhysicalGame)).ToList();
+            foreach (var g in gcDes) { Console.WriteLine(g.GetType()); }
+
+            for (int x = 0; x < gc.Count; x++)
+            {
+                // A physical Game
+                Game g1 = gc.ElementAt(x);
+                // a Game
+                Game g2 = gcDes.ElementAt(x);
+                Game g1a = g1;
+                Game g2a = g2;
+
+
+                Assert.AreEqual(g1, g1);
+                Assert.AreEqual(g2, g2);
+                Assert.AreEqual(g1, g1a);
+                Assert.AreEqual(g2, g2a);
+
+                if (g1 == g2)
+                {
+                    Console.WriteLine("equals");
+                } else
+                {
+                    Console.WriteLine("notequals");
+                }
+                Assert.AreEqual(g1, g2);
+                //Assert.IsTrue(g1 == g2);
+            }
         }
 
         [TestMethod]
         public void TestGameCollectionDisplay()
         {
-            var gc = GITestUtil.MakeGameCollection();
+            var gc = GITestUtil.MakeCapcomGameCollection();
             int digitalGames = gc.OfType<DigitalGame>().Count();
             int physicalGames = gc.OfType<PhysicalGame>().Count();
             Console.WriteLine("{0} Digital {1} and {2} Physical {3} in \"{4}\".",
@@ -66,7 +108,7 @@ namespace GameInventoryTests
         [TestMethod]
         public void TestGameCollectionDisplayIter()
         {
-            var gc = GITestUtil.MakeGameCollection();
+            var gc = GITestUtil.MakeCapcomGameCollection();
             int digitalGames = gc.OfType<DigitalGame>().Count();
             int physicalGames = gc.OfType<PhysicalGame>().Count();
             Console.WriteLine("{0} Digital {1} and {2} Physical {3} in \"{4}\".",

@@ -12,7 +12,7 @@ namespace GameInventory.Models
     {
         public Platform()
         {
-            Games = new HashSet<Game>();
+            //Games = new HashSet<Game>();
             Developer = new GameCompany();
             Publisher = new GameCompany();
             PlatformName = "";
@@ -41,6 +41,11 @@ namespace GameInventory.Models
 
         public override string ToString()
         {
+            return PlatformName;
+        }
+
+        public string DbgString()
+        {
             StringBuilder s = new StringBuilder();
             s.AppendFormat("Platform.PlatformId: {0}\n", PlatformId);
             s.AppendFormat("Platform.PlatformName: {0}\n", PlatformName);
@@ -49,8 +54,6 @@ namespace GameInventory.Models
             s.AppendFormat("Platform.Developer.GameCompanyId: {0}\n", Developer.GameCompanyId);
             s.AppendFormat("Platform.Publisher.GameCompanyName: {0}\n", Publisher.GameCompanyName);
             s.AppendFormat("Platform.Publisher.GameCompanyId: {0}\n", Publisher.GameCompanyId);
-            s.AppendFormat("Platform.GameCompany.GameCompanyName: {0}\n", GameCompany.GameCompanyName);
-            s.AppendFormat("Platform.GameCompany.GameCompanyId: {0}\n", GameCompany.GameCompanyId);
             return s.ToString();
         }
     }

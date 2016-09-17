@@ -7,65 +7,85 @@ using Newtonsoft.Json;
 
 namespace GameInventory.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    ////[JsonObject(MemberSerialization.OptIn)]
+    [DataContract]
+    [KnownType(typeof(PhysicalGame))]
+    [KnownType(typeof(DigitalGame))]
     public class Game
     {
-        [JsonObject(MemberSerialization.OptIn)]
+        //[JsonObject(MemberSerialization.OptIn)]
+        [DataContract]
         public class GameAccessory
         {
-            [JsonProperty]
+            ////[JsonProperty]
+[DataMember]
             public string AccessoryName;
         }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public int Id { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public string Title { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public ICollection<GameCompany> Publishers { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public ICollection<GameCompany> Developers { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public ICollection<string> AltTitles { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public Platform Platform { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public ICollection<GameAccessory> Accessories { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public DateTime ReleaseDate { get; set; }
 
         public int ReleaseYear { get { return ReleaseDate.Year; } }
 
         public int ReleaseDecade { get { return ReleaseDate.Year % 10; } }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public ICollection<string> DLCs { get; set; }
 
-        [JsonProperty]
+        ////[JsonProperty]
+[DataMember]
         public ICollection<string> Genres { get; set; }
 
         public override string ToString()
+        {
+            return Title;
+        }
+
+        public string DbgString()
         {
             StringBuilder s = new StringBuilder();
             s.AppendFormat("Title: {0}\n", Title);
             if (!string.IsNullOrEmpty(Platform.PlatformName)) {
                 s.AppendFormat("Platform:\n{0}", Platform);
             }
-            if (Publishers.Any())
+            if ((Publishers != null) && Publishers.Any())
             {
                 for (int x = 0; x < Publishers.Count; x++)
                 {
                     s.AppendFormat("Publisher{0}:\n{1}\n", x+1, Publishers.ElementAt(x));
                 }
             }
-            if (Developers.Any())
+            if ((Developers != null) && Developers.Any())
             {
                 for (int x = 0; x < Developers.Count; x++)
                 {

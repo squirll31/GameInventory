@@ -15,6 +15,7 @@ namespace GameInventory.Models
             GamesInCollection = new List<Game>();
         }
 
+        public string CollectionName { get; set; }
         public ICollection<Game> GamesInCollection { get; set; }
 
         #region ICollection_Impl

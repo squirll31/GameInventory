@@ -24,7 +24,7 @@ namespace GameInventory.Models
         public int CompanyId { get; set; }
         public ICollection<Game> Games { get; set; }
         public GameCompany Developer { get; set; }
-        public GameCompany Publisher{ get; set; }
+        public GameCompany Publisher { get; set; }
         public GameCompany GameCompany { get; set; }
         public override string ToString()
         {

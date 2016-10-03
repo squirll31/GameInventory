@@ -11,17 +11,17 @@ namespace GameInventory.Models
 
     //[JsonObject(MemberSerialization.OptIn)]
     [DataContract]
-    public class GameCompany
+    public class GameCompanyModel
     {
         //[JsonProperty]
+        //[DataMember]
         [DataMember]
         public int GameCompanyId { get; set; }
         //[JsonProperty]
         [DataMember]
-
         public string GameCompanyName { get; set; }
-        public ICollection<Game> GameCompanyGames { get; set; }
-        public GameCompany()
+        public ICollection<GameModel> GameCompanyGames { get; set; }
+        public GameCompanyModel()
         {
             GameCompanyId = 0;
             GameCompanyName = "";

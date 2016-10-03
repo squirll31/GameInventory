@@ -7,65 +7,64 @@ using Newtonsoft.Json;
 
 namespace GameInventory.Models
 {
-    ////[JsonObject(MemberSerialization.OptIn)]
     [DataContract]
-    [KnownType(typeof(PhysicalGame))]
-    [KnownType(typeof(DigitalGame))]
-    public class Game
+    public class GameModel : BaseItemModel
     {
-        //[JsonObject(MemberSerialization.OptIn)]
+
+        [DataMember]
+        public int Id {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+        public GameModel(int inId)
+        {
+            using (GameInventoryDBEntities db = new GameInventoryDBEntities())
+            {
+                var game = db.GetGameById(inId).Single();
+                Title = game.Title;
+                Platform = new PlatformModel(game.PlatformId);
+                Id = inId;
+            }
+        }
+
+        public GameModel()
+        {
+            Id = 0;
+        }
+
         [DataContract]
         public class GameAccessory
         {
-            ////[JsonProperty]
-[DataMember]
+            [DataMember]
             public string AccessoryName;
         }
 
-        ////[JsonProperty]
-[DataMember]
-        public int Id { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
+        [DataMember]
         public string Title { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
-        public ICollection<GameCompany> Publishers { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
-        public ICollection<GameCompany> Developers { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
+        [DataMember]
+        public ICollection<GameCompanyModel> Publishers { get; set; }
+        [DataMember]
+        public ICollection<GameCompanyModel> Developers { get; set; }
+        [DataMember]
         public ICollection<string> AltTitles { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
-        public Platform Platform { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
+        [DataMember]
+        public PlatformModel Platform { get; set; }
+        [DataMember]
         public ICollection<GameAccessory> Accessories { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
+        [DataMember]
         public DateTime ReleaseDate { get; set; }
-
         public int ReleaseYear { get { return ReleaseDate.Year; } }
-
         public int ReleaseDecade { get { return ReleaseDate.Year % 10; } }
-
-        ////[JsonProperty]
-[DataMember]
+        [DataMember]
         public ICollection<string> DLCs { get; set; }
-
-        ////[JsonProperty]
-[DataMember]
+        [DataMember]
         public ICollection<string> Genres { get; set; }
-
         public override string ToString()
         {
             return Title;

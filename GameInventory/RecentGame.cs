@@ -26,5 +26,9 @@ namespace GameInventory
         public Nullable<bool> HasAccessory { get; set; }
         public Nullable<int> OwnerId { get; set; }
         public string Notes { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public string UpdatedUser { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string CreatedUser { get; set; }
     }
 }

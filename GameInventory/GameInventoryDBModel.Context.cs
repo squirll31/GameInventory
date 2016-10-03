@@ -43,6 +43,7 @@ namespace GameInventory
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<RecentGame> RecentGames { get; set; }
         public virtual DbSet<RecentGamesView> RecentGamesViews { get; set; }
+        public virtual DbSet<PhysicalGame> PhysicalGames { get; set; }
     
         public virtual ObjectResult<Games_SelectAllByPlatform_Result> Games_SelectAllByPlatform(Nullable<int> platformId)
         {
@@ -69,6 +70,42 @@ namespace GameInventory
                 new ObjectParameter("companyId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Games_SelectAllForPublisher_Result>("Games_SelectAllForPublisher", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<GetGameById_Result> GetGameById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetGameById_Result>("GetGameById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetPlatformById_Result> GetPlatformById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlatformById_Result>("GetPlatformById", idParameter);
+        }
+    
+        public virtual ObjectResult<string> GetCompanyById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetCompanyById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetPhysicalGameById_Result> GetPhysicalGameById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPhysicalGameById_Result>("GetPhysicalGameById", idParameter);
         }
     }
 }

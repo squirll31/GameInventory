@@ -10,15 +10,17 @@
         <EntityTypeShape EntityType="GameInventoryDBModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="1" />
         <EntityTypeShape EntityType="GameInventoryDBModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="3.75" />
         <EntityTypeShape EntityType="GameInventoryDBModel.AspNetUser" Width="1.5" PointX="8" PointY="1.375" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.CompanyRelationship" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.CompanyRelationshipType" Width="1.5" PointX="0.75" PointY="2.625" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.GameCompany" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.GameOwner" Width="1.5" PointX="3" PointY="9.25" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.GameRegion" Width="1.5" PointX="3" PointY="16.875" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.Game" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.CompanyRelationship" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.CompanyRelationshipType" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GameCompany" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GameOwner" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.GameRegion" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.Game" Width="1.5" PointX="5.25" PointY="8.625" />
         <EntityTypeShape EntityType="GameInventoryDBModel.GamesForGameDevView" Width="1.5" PointX="7.75" PointY="6.75" />
         <EntityTypeShape EntityType="GameInventoryDBModel.GamesForGamePubView" Width="1.5" PointX="9.75" PointY="6.75" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.Platform" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.Platform" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.RecentGame" Width="1.5" PointX="7.75" PointY="9.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.RecentGamesView" Width="1.5" PointX="9.75" PointY="9.75" />
         <AssociationConnector Association="GameInventoryDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="GameInventoryDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="GameInventoryDBModel.FK_CompanyRelationship_ToFromCompany" />
@@ -31,8 +33,8 @@
         <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToGameRegions" />
         <AssociationConnector Association="GameInventoryDBModel.FK_Games_ToPlatforms" />
         <AssociationConnector Association="GameInventoryDBModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.RecentGame" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="GameInventoryDBModel.RecentGamesView" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.PhysicalGame" Width="1.5" PointX="7.5" PointY="15.125" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_PhysicalGames_ToTable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

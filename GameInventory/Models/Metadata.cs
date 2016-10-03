@@ -19,7 +19,7 @@ namespace GameInventory.Models
 
         [Display(Name = "Games")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<GameModel> Games { get; set; }
     }
     public class GameRegionMetadata
     {
@@ -30,7 +30,7 @@ namespace GameInventory.Models
 
         [Display(Name = "Games")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<GameModel> Games { get; set; }
 
     }
     public class PlatformMetadata
@@ -42,10 +42,10 @@ namespace GameInventory.Models
         [Display(Name = "Company Id")]
         public int CompanyId { get; set; }
         [Display(Name = "Company")]
-        public virtual GameCompany GameCompany { get; set; }
+        public virtual GameCompanyModel GameCompany { get; set; }
         [Display(Name = "Games")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<GameModel> Games { get; set; }
     }
     public class GameCompanyMetadata
     {
@@ -56,13 +56,13 @@ namespace GameInventory.Models
 
         [Display(Name = "Platforms")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platform> Platforms { get; set; }
+        public virtual ICollection<PlatformModel> Platforms { get; set; }
         [Display(Name = "GamesPublisher")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<GameModel> Games { get; set; }
         [Display(Name = "GamesDevelopwer")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Game> Games1 { get; set; }
+        public virtual ICollection<GameModel> Games1 { get; set; }
     }
 
     public class GameMetadata
@@ -92,15 +92,15 @@ namespace GameInventory.Models
         [Display(Name = "Notes")]
         public string Notes { get; set; }
         [Display(Name = "Developer")]
-        public virtual GameCompany GameCompany { get; set; }
+        public virtual GameCompanyModel GameCompany { get; set; }
         [Display(Name = "Publisher")]
-        public virtual GameCompany GameCompany1 { get; set; }
+        public virtual GameCompanyModel GameCompany1 { get; set; }
         [Display(Name = "Owner")]
         public virtual GameOwner GameOwner { get; set; }
         [Display(Name = "Region")]
         public virtual GameRegion GameRegion { get; set; }
         [Display(Name = "Platform")]
-        public virtual Platform Platform { get; set; }
+        public virtual PlatformModel Platform { get; set; }
     }
 
     public class EnrollmentMetadata

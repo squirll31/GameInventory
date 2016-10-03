@@ -282,22 +282,35 @@
     <Compile Include="Games_SelectAllForPublisher_Result.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetGameById_Result.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPhysicalGameById_Result.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPlatformById_Result.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\DigitalGame.cs" />
-    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\BaseItemModel.cs" />
+    <Compile Include="Models\DigitalGameModel.cs" />
+    <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\GameCollectionGame.cs" />
-    <Compile Include="Models\GameCompany.cs" />
-    <Compile Include="Models\PhysicalGame.cs" />
-    <Compile Include="Models\Platform.cs" />
+    <Compile Include="Models\GameCompanyModel.cs" />
+    <Compile Include="Models\PhysicalGameModel.cs" />
+    <Compile Include="Models\PlatformModel.cs" />
     <Compile Include="Models\RecentGamesViewModel.cs" />
     <Compile Include="Models\PlatformViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="PartialClasses.cs" />
+    <Compile Include="PhysicalGame.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Platform.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>

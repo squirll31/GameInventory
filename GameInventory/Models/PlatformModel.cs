@@ -4,40 +4,46 @@ using System.Linq;
 using System.Web;
 using System.Text;
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace GameInventory.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class Platform
+    [DataContract]
+    public class PlatformModel : BaseItemModel
     {
-        public Platform()
+        [DataMember]
+        public int Id {
+            get { return _id; }
+            set { _id = value; }
+        }
+        public PlatformModel(int id)
+        {
+            using (GameInventoryDBEntities db = new GameInventoryDBEntities())
+            {
+                var p = db.GetPlatformById(id).Single();
+                PlatformName = p.Title;
+                Id = id;
+            }
+        }
+
+        public PlatformModel()
         {
             //Games = new HashSet<Game>();
-            Developer = new GameCompany();
-            Publisher = new GameCompany();
+            Developer = new GameCompanyModel();
+            Publisher = new GameCompanyModel();
             PlatformName = "";
-            PlatformId = 0;
+            Id = 0;
             CompanyId = 0;
         }
 
-        [JsonProperty]
-        public int PlatformId { get; set; }
-
-        [JsonProperty]
+        [DataMember]
         public string PlatformName { get; set; }
-
-        [JsonProperty]
+        [DataMember]
         public int CompanyId { get; set; }
-        public ICollection<Game> Games { get; set; }
-
-        [JsonProperty]
-        public GameCompany Developer { get; set; }
-
-        [JsonProperty]
-        public GameCompany Publisher { get; set; }
-
-        [JsonProperty]
-        public GameCompany GameCompany { get; set; }
+        public ICollection<GameModel> Games { get; set; }
+        public GameCompanyModel Developer { get; set; }
+        public GameCompanyModel Publisher { get; set; }
+        public GameCompanyModel GameCompany { get; set; }
 
         public override string ToString()
         {
@@ -47,7 +53,7 @@ namespace GameInventory.Models
         public string DbgString()
         {
             StringBuilder s = new StringBuilder();
-            s.AppendFormat("Platform.PlatformId: {0}\n", PlatformId);
+            s.AppendFormat("Platform.PlatformId: {0}\n", Id);
             s.AppendFormat("Platform.PlatformName: {0}\n", PlatformName);
             s.AppendFormat("Platform.CompanyId: {0}\n", CompanyId);
             s.AppendFormat("Platform.Developer.GameCompanyName: {0}\n", Developer.GameCompanyName);

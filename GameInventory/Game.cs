@@ -36,5 +36,6 @@ namespace GameInventory
         public virtual GameOwner GameOwner { get; set; }
         public virtual GameRegion GameRegion { get; set; }
         public virtual Platform Platform { get; set; }
+        public virtual PhysicalGame PhysicalGame { get; set; }
     }
 }

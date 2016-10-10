@@ -11,9 +11,12 @@
 <h2>Game Owners</h2>
 <h4>Total: @Model.Count()</h4>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table id="OwnerTable" class="table table-striped">
     <thead>
         <tr>
@@ -39,9 +42,14 @@
                     @Html.DisplayFor(modelItem => item.OwnerUserId)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.GameOwnerId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.GameOwnerId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.GameOwnerId })
+                    @if(User.Identity.IsAuthenticated)
+                    { 
+                        @Html.ActionLink("Edit", "Edit", new { id = item.GameOwnerId }) @:|
+                        @Html.ActionLink("Details", "Details", new { id = item.GameOwnerId }) @:|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.GameOwnerId })
+                    } else {
+                        @Html.ActionLink("Details", "Details", new { id = item.GameOwnerId })
+                    }
                 </td>
             </tr>
         }

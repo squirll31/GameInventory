@@ -39,12 +39,17 @@ namespace GameInventory.Controllers
         // GET: Games/Create
         public ActionResult Create()
         {
-            ViewBag.DeveloperId = new SelectList(db.GameCompanies.OrderBy(m => m.GameCompanyName), "GameCompanyId", "GameCompanyName");
-            ViewBag.PublisherId = new SelectList(db.GameCompanies.OrderBy(m => m.GameCompanyName), "GameCompanyId", "GameCompanyName");
-            ViewBag.RegionId = new SelectList(db.GameRegions.OrderBy(m => m.GameRegionName), "GameRegionId", "GameRegionName");
-            ViewBag.PlatformId = new SelectList(db.Platforms.OrderBy(m => m.PlatformName), "PlatformId", "PlatformName");
-            ViewBag.OwnerId = new SelectList(db.GameOwners.OrderBy(m => m.GameOwnerName), "GameOwnerId", "GameOwnerName");
-            return View();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                ViewBag.DeveloperId = new SelectList(db.GameCompanies.OrderBy(m => m.GameCompanyName), "GameCompanyId", "GameCompanyName");
+                ViewBag.PublisherId = new SelectList(db.GameCompanies.OrderBy(m => m.GameCompanyName), "GameCompanyId", "GameCompanyName");
+                ViewBag.RegionId = new SelectList(db.GameRegions.OrderBy(m => m.GameRegionName), "GameRegionId", "GameRegionName");
+                ViewBag.PlatformId = new SelectList(db.Platforms.OrderBy(m => m.PlatformName), "PlatformId", "PlatformName");
+                ViewBag.OwnerId = new SelectList(db.GameOwners.OrderBy(m => m.GameOwnerName), "GameOwnerId", "GameOwnerName");
+                return View();
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
         }
 
         // POST: Games/Create
@@ -72,21 +77,27 @@ namespace GameInventory.Controllers
         // GET: Games/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Game game = db.Games.Find(id);
+                if (game == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.DeveloperId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.DeveloperId);
+                ViewBag.PublisherId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.PublisherId);
+                ViewBag.RegionId = new SelectList(db.GameRegions, "GameRegionId", "GameRegionName", game.RegionId);
+                ViewBag.PlatformId = new SelectList(db.Platforms, "PlatformId", "PlatformName", game.PlatformId);
+                ViewBag.OwnerId = new SelectList(db.GameOwners, "GameOwnerId", "GameOwnerName", game.OwnerId);
+                return View(game);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            Game game = db.Games.Find(id);
-            if (game == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.DeveloperId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.DeveloperId);
-            ViewBag.PublisherId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.PublisherId);
-            ViewBag.RegionId = new SelectList(db.GameRegions, "GameRegionId", "GameRegionName", game.RegionId);
-            ViewBag.PlatformId = new SelectList(db.Platforms, "PlatformId", "PlatformName", game.PlatformId);
-            ViewBag.OwnerId = new SelectList(db.GameOwners, "GameOwnerId", "GameOwnerName", game.OwnerId);
-            return View(game);
         }
 
         // POST: Games/Edit/5
@@ -96,34 +107,45 @@ namespace GameInventory.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GameId,PlatformId,Title,DeveloperId,RegionId,PublisherId,HasCase,HasManual,ModelName,HasAccessory,OwnerId,Notes")] Game game)
         {
-            if (ModelState.IsValid)
+            if (User.IsInRole("GameOwner"))
+            { 
+                if (ModelState.IsValid)
+                {
+                    db.Entry(game).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.DeveloperId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.DeveloperId);
+                ViewBag.PublisherId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.PublisherId);
+                ViewBag.RegionId = new SelectList(db.GameRegions, "GameRegionId", "GameRegionName", game.RegionId);
+                ViewBag.PlatformId = new SelectList(db.Platforms, "PlatformId", "PlatformName", game.PlatformId);
+                ViewBag.OwnerId = new SelectList(db.GameOwners, "GameOwnerId", "GameOwnerName", game.OwnerId);
+                return View(game);
+            } else
             {
-                db.Entry(game).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return Content("Nope.");
             }
-            ViewBag.DeveloperId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.DeveloperId);
-            ViewBag.PublisherId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", game.PublisherId);
-            ViewBag.RegionId = new SelectList(db.GameRegions, "GameRegionId", "GameRegionName", game.RegionId);
-            ViewBag.PlatformId = new SelectList(db.Platforms, "PlatformId", "PlatformName", game.PlatformId);
-            ViewBag.OwnerId = new SelectList(db.GameOwners, "GameOwnerId", "GameOwnerName", game.OwnerId);
-            return View(game);
         }
 
         // GET: Games/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Game game = db.Games.Find(id);
+                if (game == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(game);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Please log in before editing data.");
             }
-            Game game = db.Games.Find(id);
-            if (game == null)
-            {
-                return HttpNotFound();
-            }
-            return View(game);
-        }
+}
 
         // POST: Games/Delete/5
         [HttpPost, ActionName("Delete")]

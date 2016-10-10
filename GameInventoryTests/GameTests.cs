@@ -119,7 +119,7 @@ namespace GameInventoryTests
         [TestMethod]
         public void GetPhysicalGame()
         {
-            int targetId = 6044;
+            int targetId = 2035;
             PhysicalGameModel g = new PhysicalGameModel(targetId);
             Console.WriteLine(g);
             Console.WriteLine(g.Box);
@@ -129,6 +129,19 @@ namespace GameInventoryTests
             Console.WriteLine(g.Id);
             Console.WriteLine(g.Version);
             Console.WriteLine(g.Model);
+        }
+
+        [TestMethod]
+        public void GetDigitalGame()
+        {
+            int targetId = 6074;
+            DigitalGameModel g = new DigitalGameModel(targetId);
+            Console.WriteLine(g);
+            Console.WriteLine(g.Platform);
+            Console.WriteLine(g.Title);
+            Console.WriteLine(g.Id);
+            Console.WriteLine(g.ServiceName);
+            Console.WriteLine(g.ServiceId);
         }
 
         [TestMethod]

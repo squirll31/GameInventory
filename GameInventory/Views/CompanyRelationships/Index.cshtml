@@ -10,9 +10,13 @@
 <script type="text/javascript" src="~/Scripts/datatables.min.js"></script>
 <h2>Game Company Relationships</h2>
 <h4>Total: @Model.Count()</h4>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table id="RelationshipTable" class="table table-striped">
     <thead>
         <tr>
@@ -44,9 +48,16 @@
                     @Html.DisplayFor(modelItem => item.CompanyRelationshipType.CompanyRelationshipTypeName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CompanyRelationshipId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CompanyRelationshipId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CompanyRelationshipId })
+                    @if(User.Identity.IsAuthenticated)
+                    { 
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CompanyRelationshipId }) @:|
+                        @Html.ActionLink("Details", "Details", new { id = item.CompanyRelationshipId }) @:|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CompanyRelationshipId })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.CompanyRelationshipId })
+                    }
                 </td>
             </tr>
         }

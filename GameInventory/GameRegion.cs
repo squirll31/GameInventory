@@ -18,6 +18,7 @@ namespace GameInventory
         public GameRegion()
         {
             this.Games = new HashSet<Game>();
+            this.WantedGames = new HashSet<WantedGame>();
         }
     
         public int GameRegionId { get; set; }
@@ -25,5 +26,7 @@ namespace GameInventory
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WantedGame> WantedGames { get; set; }
     }
 }

@@ -44,6 +44,10 @@ namespace GameInventory
         public virtual DbSet<RecentGame> RecentGames { get; set; }
         public virtual DbSet<RecentGamesView> RecentGamesViews { get; set; }
         public virtual DbSet<PhysicalGame> PhysicalGames { get; set; }
+        public virtual DbSet<DigitalService> DigitalServices { get; set; }
+        public virtual DbSet<DigtialGame> DigtialGames { get; set; }
+        public virtual DbSet<WantedGame> WantedGames { get; set; }
+        public virtual DbSet<WantedHardware> WantedHardwares { get; set; }
     
         public virtual ObjectResult<Games_SelectAllByPlatform_Result> Games_SelectAllByPlatform(Nullable<int> platformId)
         {
@@ -106,6 +110,47 @@ namespace GameInventory
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPhysicalGameById_Result>("GetPhysicalGameById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetDigitalGameById_Result> GetDigitalGameById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDigitalGameById_Result>("GetDigitalGameById", idParameter);
+        }
+    
+        public virtual ObjectResult<GetDigitalGameByGameId_Result> GetDigitalGameByGameId(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDigitalGameByGameId_Result>("GetDigitalGameByGameId", idParameter);
+        }
+    
+        public virtual ObjectResult<GetWantedGameById_Result> GetWantedGameById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWantedGameById_Result>("GetWantedGameById", idParameter);
+        }
+    
+        public virtual ObjectResult<Prices_SelectByConsoleName_Result> Prices_SelectByConsoleName(string console)
+        {
+            var consoleParameter = console != null ?
+                new ObjectParameter("console", console) :
+                new ObjectParameter("console", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Prices_SelectByConsoleName_Result>("Prices_SelectByConsoleName", consoleParameter);
+        }
+    
+        public virtual ObjectResult<string> Prices_SelectConsoleNames()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Prices_SelectConsoleNames");
         }
     }
 }

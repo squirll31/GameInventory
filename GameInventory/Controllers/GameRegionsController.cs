@@ -38,7 +38,12 @@ namespace GameInventory.Controllers
         // GET: GameRegions/Create
         public ActionResult Create()
         {
-            return View();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return View();
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
         }
 
         // POST: GameRegions/Create
@@ -61,16 +66,21 @@ namespace GameInventory.Controllers
         // GET: GameRegions/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GameRegion gameRegion = db.GameRegions.Find(id);
+                if (gameRegion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gameRegion);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            GameRegion gameRegion = db.GameRegions.Find(id);
-            if (gameRegion == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gameRegion);
         }
 
         // POST: GameRegions/Edit/5
@@ -92,16 +102,20 @@ namespace GameInventory.Controllers
         // GET: GameRegions/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (this.User.Identity.IsAuthenticated) {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GameRegion gameRegion = db.GameRegions.Find(id);
+                if (gameRegion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gameRegion);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            GameRegion gameRegion = db.GameRegions.Find(id);
-            if (gameRegion == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gameRegion);
         }
 
         // POST: GameRegions/Delete/5

@@ -18,6 +18,7 @@ namespace GameInventory
         public Platform()
         {
             this.Games = new HashSet<Game>();
+            this.WantedGames = new HashSet<WantedGame>();
         }
     
         public int PlatformId { get; set; }
@@ -27,5 +28,7 @@ namespace GameInventory
         public virtual GameCompany GameCompany { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WantedGame> WantedGames { get; set; }
     }
 }

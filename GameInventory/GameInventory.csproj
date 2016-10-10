@@ -209,6 +209,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\PRGE\Controllers\PRGEHomeController.cs" />
+    <Compile Include="Areas\PRGE\Models\PRGEWantedGameModel.cs" />
+    <Compile Include="Areas\PRGE\Models\PRGEBaseModel.cs" />
+    <Compile Include="Areas\PRGE\Models\PRGEWantedHardware.cs" />
+    <Compile Include="Areas\PRGE\PRGEAreaRegistration.cs" />
     <Compile Include="AspNetRole.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
@@ -238,6 +243,12 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DigitalService.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DigtialGame.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Game.cs">
@@ -282,6 +293,12 @@
     <Compile Include="Games_SelectAllForPublisher_Result.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetDigitalGameByGameId_Result.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetDigitalGameById_Result.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetGameById_Result.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
@@ -289,6 +306,9 @@
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetPlatformById_Result.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetWantedGameById_Result.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -307,11 +327,15 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="PartialClasses.cs" />
     <Compile Include="PhysicalGame.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Platform.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prices_SelectByConsoleName_Result.cs">
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -322,6 +346,12 @@
       <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="WantedGame.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WantedHardware.cs">
+      <DependentUpon>GameInventoryDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap-3.3.6\css\bootstrap-theme.css" />
@@ -393,6 +423,12 @@
     <Content Include="Content\Bootstrap-3.3.6\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Bootstrap-3.3.6\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Areas\PRGE\Views\web.config" />
+    <Content Include="Areas\PRGE\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PRGE\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\PRGE\Views\PRGEHome\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Gamestore180 %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Gamestore180.pubxml" />
     <None Include="Properties\PublishProfiles\Localdb.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -40,7 +40,13 @@ namespace GameInventory.Controllers
         // GET: GameCompanies/Create
         public ActionResult Create()
         {
-            return View();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
         }
 
         // POST: GameCompanies/Create
@@ -63,16 +69,23 @@ namespace GameInventory.Controllers
         // GET: GameCompanies/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GameCompany gameCompany = db.GameCompanies.Find(id);
+                if (gameCompany == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gameCompany);
             }
-            GameCompany gameCompany = db.GameCompanies.Find(id);
-            if (gameCompany == null)
-            {
-                return HttpNotFound();
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            return View(gameCompany);
+
         }
 
         // POST: GameCompanies/Edit/5
@@ -94,16 +107,21 @@ namespace GameInventory.Controllers
         // GET: GameCompanies/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GameCompany gameCompany = db.GameCompanies.Find(id);
+                if (gameCompany == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gameCompany);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            GameCompany gameCompany = db.GameCompanies.Find(id);
-            if (gameCompany == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gameCompany);
         }
 
         // POST: GameCompanies/Delete/5

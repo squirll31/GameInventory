@@ -39,10 +39,15 @@ namespace GameInventory.Controllers
         // GET: CompanyRelationships/Create
         public ActionResult Create()
         {
-            ViewBag.FromCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName");
-            ViewBag.ToCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName");
-            ViewBag.CompanyRelationshipTypeId = new SelectList(db.CompanyRelationshipTypes, "CompanyRelationshipTypeId", "CompanyRelationshipTypeName");
-            return View();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                ViewBag.FromCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName");
+                ViewBag.ToCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName");
+                ViewBag.CompanyRelationshipTypeId = new SelectList(db.CompanyRelationshipTypes, "CompanyRelationshipTypeId", "CompanyRelationshipTypeName");
+                return View();
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
         }
 
         // POST: CompanyRelationships/Create
@@ -68,19 +73,25 @@ namespace GameInventory.Controllers
         // GET: CompanyRelationships/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CompanyRelationship companyRelationship = db.CompanyRelationships.Find(id);
+                if (companyRelationship == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.FromCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", companyRelationship.FromCompany);
+                ViewBag.ToCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", companyRelationship.ToCompany);
+                ViewBag.CompanyRelationshipTypeId = new SelectList(db.CompanyRelationshipTypes, "CompanyRelationshipTypeId", "CompanyRelationshipTypeName", companyRelationship.CompanyRelationshipTypeId);
+                return View(companyRelationship);
             }
-            CompanyRelationship companyRelationship = db.CompanyRelationships.Find(id);
-            if (companyRelationship == null)
-            {
-                return HttpNotFound();
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            ViewBag.FromCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", companyRelationship.FromCompany);
-            ViewBag.ToCompany = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", companyRelationship.ToCompany);
-            ViewBag.CompanyRelationshipTypeId = new SelectList(db.CompanyRelationshipTypes, "CompanyRelationshipTypeId", "CompanyRelationshipTypeName", companyRelationship.CompanyRelationshipTypeId);
-            return View(companyRelationship);
         }
 
         // POST: CompanyRelationships/Edit/5
@@ -105,16 +116,21 @@ namespace GameInventory.Controllers
         // GET: CompanyRelationships/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CompanyRelationship companyRelationship = db.CompanyRelationships.Find(id);
+                if (companyRelationship == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(companyRelationship);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            CompanyRelationship companyRelationship = db.CompanyRelationships.Find(id);
-            if (companyRelationship == null)
-            {
-                return HttpNotFound();
-            }
-            return View(companyRelationship);
         }
 
         // POST: CompanyRelationships/Delete/5

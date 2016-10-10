@@ -38,7 +38,12 @@ namespace GameInventory.Controllers
         // GET: GameOwners/Create
         public ActionResult Create()
         {
-            return View();
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return View();
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
         }
 
         // POST: GameOwners/Create
@@ -61,16 +66,22 @@ namespace GameInventory.Controllers
         // GET: GameOwners/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GameOwner gameOwner = db.GameOwners.Find(id);
+                if (gameOwner == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gameOwner);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            GameOwner gameOwner = db.GameOwners.Find(id);
-            if (gameOwner == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gameOwner);
+
         }
 
         // POST: GameOwners/Edit/5
@@ -92,16 +103,21 @@ namespace GameInventory.Controllers
         // GET: GameOwners/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                GameOwner gameOwner = db.GameOwners.Find(id);
+                if (gameOwner == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gameOwner);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            GameOwner gameOwner = db.GameOwners.Find(id);
-            if (gameOwner == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gameOwner);
         }
 
         // POST: GameOwners/Delete/5

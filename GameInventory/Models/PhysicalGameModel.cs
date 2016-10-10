@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using Microsoft.AspNet.Identity;
+
 
 namespace GameInventory.Models
 {
@@ -11,14 +13,9 @@ namespace GameInventory.Models
     [DataContract]
     public class PhysicalGameModel : GameModel, IComparable<GameModel>
     {
-        public PhysicalGameModel()
-            : base()
-        {
+        public PhysicalGameModel() : base() { }
 
-        }
-
-        public PhysicalGameModel(int id)
-            : base(id)
+        public PhysicalGameModel(int id) : base(id)
         {
             //6044
             using (GameInventoryDBEntities db = new GameInventoryDBEntities())

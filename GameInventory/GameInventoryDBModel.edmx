@@ -82,6 +82,21 @@
           <Property Name="CompanyRelationshipTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyRelationshipTypeName" Type="varchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="DigitalService">
+          <Key>
+            <PropertyRef Name="DigitalServiceId" />
+          </Key>
+          <Property Name="DigitalServiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="DigtialGames">
+          <Key>
+            <PropertyRef Name="DigitalGameId" />
+          </Key>
+          <Property Name="DigitalGameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="GameCompanies">
           <Key>
             <PropertyRef Name="GameCompanyId" />
@@ -156,6 +171,40 @@
           <Property Name="PlatformId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlatformName" Type="varchar" MaxLength="255" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WantedGames">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlatformId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" />
+          <Property Name="DeveloperId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="PublisherId" Type="int" />
+          <Property Name="HasCase" Type="bit" />
+          <Property Name="HasManual" Type="bit" />
+          <Property Name="ModelName" Type="varchar" MaxLength="255" />
+          <Property Name="HasAccessory" Type="bit" />
+          <Property Name="OwnerId" Type="int" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedUser" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="varchar(max)" />
+          <Property Name="MaxPrice" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="IdealPrice" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ExpectedPrice" Type="decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="WantedHardware">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HardwareItemName" Type="varchar(max)" Nullable="false" />
+          <Property Name="MaxPrice" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="IdealPrice" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ExpectedPrice" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Inventory_Test.dbo.RecentGames' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -293,6 +342,30 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DigtialGames_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="1" />
+          <End Role="DigtialGames" Type="Self.DigtialGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="DigtialGames">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DigtialGames_ToTable">
+          <End Role="DigitalService" Type="Self.DigitalService" Multiplicity="1" />
+          <End Role="DigtialGames" Type="Self.DigtialGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DigitalService">
+              <PropertyRef Name="DigitalServiceId" />
+            </Principal>
+            <Dependent Role="DigtialGames">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Games_ToGameDevCompany">
           <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
           <End Role="Games" Type="Self.Games" Multiplicity="*" />
@@ -377,6 +450,66 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WantedGames_ToGameDevCompany">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
+          <End Role="WantedGames" Type="Self.WantedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="WantedGames">
+              <PropertyRef Name="DeveloperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToGameOwners">
+          <End Role="GameOwners" Type="Self.GameOwners" Multiplicity="0..1" />
+          <End Role="WantedGames" Type="Self.WantedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameOwners">
+              <PropertyRef Name="GameOwnerId" />
+            </Principal>
+            <Dependent Role="WantedGames">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToGamePubCompany">
+          <End Role="GameCompanies" Type="Self.GameCompanies" Multiplicity="0..1" />
+          <End Role="WantedGames" Type="Self.WantedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompanies">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="WantedGames">
+              <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToGameRegions">
+          <End Role="GameRegions" Type="Self.GameRegions" Multiplicity="0..1" />
+          <End Role="WantedGames" Type="Self.WantedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameRegions">
+              <PropertyRef Name="GameRegionId" />
+            </Principal>
+            <Dependent Role="WantedGames">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToPlatforms">
+          <End Role="Platforms" Type="Self.Platforms" Multiplicity="1" />
+          <End Role="WantedGames" Type="Self.WantedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platforms">
+              <PropertyRef Name="PlatformId" />
+            </Principal>
+            <Dependent Role="WantedGames">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Games_SelectAllByPlatform" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="platformId" Type="int" Mode="In" />
         </Function>
@@ -389,6 +522,12 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
         <Function Name="GetCompanyById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetDigitalGameByGameId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDigitalGameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetGameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -398,6 +537,13 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
         <Function Name="GetPlatformById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetWantedGameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Prices_SelectByConsoleName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="console" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Prices_SelectConsoleNames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GameInventoryDBModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -407,6 +553,8 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyRelationships" EntityType="Self.CompanyRelationships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyRelationshipTypes" EntityType="Self.CompanyRelationshipTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DigitalService" EntityType="Self.DigitalService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DigtialGames" EntityType="Self.DigtialGames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GameCompanies" EntityType="Self.GameCompanies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GameOwners" EntityType="Self.GameOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GameRegions" EntityType="Self.GameRegions" Schema="dbo" store:Type="Tables" />
@@ -415,6 +563,8 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <EntitySet Name="GamesForGamePubViews" EntityType="Self.GamesForGamePubViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhysicalGames" EntityType="Self.PhysicalGames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Platforms" EntityType="Self.Platforms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WantedGames" EntityType="Self.WantedGames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WantedHardware" EntityType="Self.WantedHardware" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecentGames" EntityType="Self.RecentGames" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [RecentGames].[GameId] AS [GameId], 
@@ -479,6 +629,14 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_DigtialGames_Games" Association="Self.FK_DigtialGames_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="DigtialGames" EntitySet="DigtialGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DigtialGames_ToTable" Association="Self.FK_DigtialGames_ToTable">
+            <End Role="DigitalService" EntitySet="DigitalService" />
+            <End Role="DigtialGames" EntitySet="DigtialGames" />
+          </AssociationSet>
           <AssociationSet Name="FK_Games_ToGameDevCompany" Association="Self.FK_Games_ToGameDevCompany">
             <End Role="GameCompanies" EntitySet="GameCompanies" />
             <End Role="Games" EntitySet="Games" />
@@ -506,6 +664,26 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <AssociationSet Name="FK_Platforms_ToGameCompanies" Association="Self.FK_Platforms_ToGameCompanies">
             <End Role="GameCompanies" EntitySet="GameCompanies" />
             <End Role="Platforms" EntitySet="Platforms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGameDevCompany" Association="Self.FK_WantedGames_ToGameDevCompany">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="WantedGames" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGameOwners" Association="Self.FK_WantedGames_ToGameOwners">
+            <End Role="GameOwners" EntitySet="GameOwners" />
+            <End Role="WantedGames" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGamePubCompany" Association="Self.FK_WantedGames_ToGamePubCompany">
+            <End Role="GameCompanies" EntitySet="GameCompanies" />
+            <End Role="WantedGames" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGameRegions" Association="Self.FK_WantedGames_ToGameRegions">
+            <End Role="GameRegions" EntitySet="GameRegions" />
+            <End Role="WantedGames" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToPlatforms" Association="Self.FK_WantedGames_ToPlatforms">
+            <End Role="Platforms" EntitySet="Platforms" />
+            <End Role="WantedGames" EntitySet="WantedGames" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -601,8 +779,53 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
             <End Role="PhysicalGame" EntitySet="PhysicalGames" />
           </AssociationSet>
           <FunctionImport Name="GetPhysicalGameById" ReturnType="Collection(GameInventoryDBModel.GetPhysicalGameById_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="DigitalServices" EntityType="GameInventoryDBModel.DigitalService" />
+          <EntitySet Name="DigtialGames" EntityType="GameInventoryDBModel.DigtialGame" />
+          <AssociationSet Name="FK_DigtialGames_ToTable" Association="GameInventoryDBModel.FK_DigtialGames_ToTable">
+            <End Role="DigitalService" EntitySet="DigitalServices" />
+            <End Role="DigtialGame" EntitySet="DigtialGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DigtialGames_Games" Association="GameInventoryDBModel.FK_DigtialGames_Games">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="DigtialGame" EntitySet="DigtialGames" />
+          </AssociationSet>
+          <FunctionImport Name="GetDigitalGameById" ReturnType="Collection(GameInventoryDBModel.GetDigitalGameById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDigitalGameByGameId" ReturnType="Collection(GameInventoryDBModel.GetDigitalGameByGameId_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="WantedGames" EntityType="GameInventoryDBModel.WantedGame" />
+          <AssociationSet Name="FK_WantedGames_ToGameDevCompany" Association="GameInventoryDBModel.FK_WantedGames_ToGameDevCompany">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="WantedGame" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGamePubCompany" Association="GameInventoryDBModel.FK_WantedGames_ToGamePubCompany">
+            <End Role="GameCompany" EntitySet="GameCompanies" />
+            <End Role="WantedGame" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGameOwners" Association="GameInventoryDBModel.FK_WantedGames_ToGameOwners">
+            <End Role="GameOwner" EntitySet="GameOwners" />
+            <End Role="WantedGame" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToGameRegions" Association="GameInventoryDBModel.FK_WantedGames_ToGameRegions">
+            <End Role="GameRegion" EntitySet="GameRegions" />
+            <End Role="WantedGame" EntitySet="WantedGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WantedGames_ToPlatforms" Association="GameInventoryDBModel.FK_WantedGames_ToPlatforms">
+            <End Role="Platform" EntitySet="Platforms" />
+            <End Role="WantedGame" EntitySet="WantedGames" />
+          </AssociationSet>
+          <FunctionImport Name="GetWantedGameById" ReturnType="Collection(GameInventoryDBModel.GetWantedGameById_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="WantedHardwares" EntityType="GameInventoryDBModel.WantedHardware" />
+          <FunctionImport Name="Prices_SelectByConsoleName" ReturnType="Collection(GameInventoryDBModel.Prices_SelectByConsoleName_Result)">
+          <Parameter Name="console" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Prices_SelectConsoleNames" ReturnType="Collection(String)" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -694,6 +917,8 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToGameDevCompany" FromRole="GameCompany" ToRole="Game" />
           <NavigationProperty Name="Games1" Relationship="GameInventoryDBModel.FK_Games_ToGamePubCompany" FromRole="GameCompany" ToRole="Game" />
           <NavigationProperty Name="Platforms" Relationship="GameInventoryDBModel.FK_Platforms_ToGameCompanies" FromRole="GameCompany" ToRole="Platform" />
+          <NavigationProperty Name="WantedGames" Relationship="GameInventoryDBModel.FK_WantedGames_ToGameDevCompany" FromRole="GameCompany" ToRole="WantedGame" />
+          <NavigationProperty Name="WantedGames1" Relationship="GameInventoryDBModel.FK_WantedGames_ToGamePubCompany" FromRole="GameCompany" ToRole="WantedGame" />
         </EntityType>
         <EntityType Name="GameOwner">
           <Key>
@@ -703,6 +928,7 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <Property Name="GameOwnerName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="OwnerUserId" Type="Int32" />
           <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToGameOwners" FromRole="GameOwner" ToRole="Game" />
+          <NavigationProperty Name="WantedGames" Relationship="GameInventoryDBModel.FK_WantedGames_ToGameOwners" FromRole="GameOwner" ToRole="WantedGame" />
         </EntityType>
         <EntityType Name="GameRegion">
           <Key>
@@ -711,6 +937,7 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <Property Name="GameRegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GameRegionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToGameRegions" FromRole="GameRegion" ToRole="Game" />
+          <NavigationProperty Name="WantedGames" Relationship="GameInventoryDBModel.FK_WantedGames_ToGameRegions" FromRole="GameRegion" ToRole="WantedGame" />
         </EntityType>
         <EntityType Name="Game">
           <Key>
@@ -738,6 +965,7 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <NavigationProperty Name="GameRegion" Relationship="GameInventoryDBModel.FK_Games_ToGameRegions" FromRole="Game" ToRole="GameRegion" />
           <NavigationProperty Name="Platform" Relationship="GameInventoryDBModel.FK_Games_ToPlatforms" FromRole="Game" ToRole="Platform" />
           <NavigationProperty Name="PhysicalGame" Relationship="GameInventoryDBModel.FK_PhysicalGames_ToTable" FromRole="Game" ToRole="PhysicalGame" />
+          <NavigationProperty Name="DigtialGames" Relationship="GameInventoryDBModel.FK_DigtialGames_Games" FromRole="Game" ToRole="DigtialGame" />
         </EntityType>
         <EntityType Name="GamesForGameDevView">
           <Key>
@@ -762,6 +990,7 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GameCompany" Relationship="GameInventoryDBModel.FK_Platforms_ToGameCompanies" FromRole="Platform" ToRole="GameCompany" />
           <NavigationProperty Name="Games" Relationship="GameInventoryDBModel.FK_Games_ToPlatforms" FromRole="Platform" ToRole="Game" />
+          <NavigationProperty Name="WantedGames" Relationship="GameInventoryDBModel.FK_WantedGames_ToPlatforms" FromRole="Platform" ToRole="WantedGame" />
         </EntityType>
         <EntityType Name="RecentGame">
           <Key>
@@ -1038,6 +1267,173 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
           <Property Type="Boolean" Name="Manual" Nullable="true" />
           <Property Type="String" Name="Model" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Version" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="DigitalService">
+          <Key>
+            <PropertyRef Name="DigitalServiceId" />
+          </Key>
+          <Property Name="DigitalServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DigtialGames" Relationship="GameInventoryDBModel.FK_DigtialGames_ToTable" FromRole="DigitalService" ToRole="DigtialGame" />
+        </EntityType>
+        <EntityType Name="DigtialGame">
+          <Key>
+            <PropertyRef Name="DigitalGameId" />
+          </Key>
+          <Property Name="DigitalGameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DigitalService" Relationship="GameInventoryDBModel.FK_DigtialGames_ToTable" FromRole="DigtialGame" ToRole="DigitalService" />
+          <NavigationProperty Name="Game" Relationship="GameInventoryDBModel.FK_DigtialGames_Games" FromRole="DigtialGame" ToRole="Game" />
+        </EntityType>
+        <Association Name="FK_DigtialGames_ToTable">
+          <End Type="GameInventoryDBModel.DigitalService" Role="DigitalService" Multiplicity="1" />
+          <End Type="GameInventoryDBModel.DigtialGame" Role="DigtialGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DigitalService">
+              <PropertyRef Name="DigitalServiceId" />
+            </Principal>
+            <Dependent Role="DigtialGame">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DigtialGames_Games">
+          <End Type="GameInventoryDBModel.Game" Role="Game" Multiplicity="1" />
+          <End Type="GameInventoryDBModel.DigtialGame" Role="DigtialGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="DigtialGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetDigitalGameById_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int32" Name="ServiceId" Nullable="false" />
+          <Property Type="String" Name="ServiceName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetDigitalGameByGameId_Result">
+          <Property Type="Int32" Name="DigitalGameId" Nullable="false" />
+          <Property Type="Int32" Name="ServiceId" Nullable="false" />
+          <Property Type="String" Name="ServiceName" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="WantedGame">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlatformId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DeveloperId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="PublisherId" Type="Int32" />
+          <Property Name="HasCase" Type="Boolean" />
+          <Property Name="HasManual" Type="Boolean" />
+          <Property Name="ModelName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HasAccessory" Type="Boolean" />
+          <Property Name="OwnerId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GameCompany" Relationship="GameInventoryDBModel.FK_WantedGames_ToGameDevCompany" FromRole="WantedGame" ToRole="GameCompany" />
+          <NavigationProperty Name="GameCompany1" Relationship="GameInventoryDBModel.FK_WantedGames_ToGamePubCompany" FromRole="WantedGame" ToRole="GameCompany" />
+          <NavigationProperty Name="GameOwner" Relationship="GameInventoryDBModel.FK_WantedGames_ToGameOwners" FromRole="WantedGame" ToRole="GameOwner" />
+          <NavigationProperty Name="GameRegion" Relationship="GameInventoryDBModel.FK_WantedGames_ToGameRegions" FromRole="WantedGame" ToRole="GameRegion" />
+          <NavigationProperty Name="Platform" Relationship="GameInventoryDBModel.FK_WantedGames_ToPlatforms" FromRole="WantedGame" ToRole="Platform" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IdealPrice" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ExpectedPrice" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <Association Name="FK_WantedGames_ToGameDevCompany">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.WantedGame" Role="WantedGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="WantedGame">
+              <PropertyRef Name="DeveloperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToGamePubCompany">
+          <End Type="GameInventoryDBModel.GameCompany" Role="GameCompany" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.WantedGame" Role="WantedGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameCompany">
+              <PropertyRef Name="GameCompanyId" />
+            </Principal>
+            <Dependent Role="WantedGame">
+              <PropertyRef Name="PublisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToGameOwners">
+          <End Type="GameInventoryDBModel.GameOwner" Role="GameOwner" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.WantedGame" Role="WantedGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameOwner">
+              <PropertyRef Name="GameOwnerId" />
+            </Principal>
+            <Dependent Role="WantedGame">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToGameRegions">
+          <End Type="GameInventoryDBModel.GameRegion" Role="GameRegion" Multiplicity="0..1" />
+          <End Type="GameInventoryDBModel.WantedGame" Role="WantedGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GameRegion">
+              <PropertyRef Name="GameRegionId" />
+            </Principal>
+            <Dependent Role="WantedGame">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WantedGames_ToPlatforms">
+          <End Type="GameInventoryDBModel.Platform" Role="Platform" Multiplicity="1" />
+          <End Type="GameInventoryDBModel.WantedGame" Role="WantedGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platform">
+              <PropertyRef Name="PlatformId" />
+            </Principal>
+            <Dependent Role="WantedGame">
+              <PropertyRef Name="PlatformId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetWantedGameById_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="PlatformId" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="WantedHardware">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HardwareItemName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IdealPrice" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ExpectedPrice" Type="Decimal" Precision="5" Scale="2" />
+        </EntityType>
+        <ComplexType Name="Prices_SelectByConsoleName_Result">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="ConsoleName" Nullable="true" />
+          <Property Type="Decimal" Name="LoosePrice" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="CIBPrice" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="NewPrice" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Genre" Nullable="true" />
+          <Property Type="DateTime" Name="ReleaseDate" Nullable="true" />
+          <Property Type="String" Name="UPC" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1347,6 +1743,102 @@ warning 6002: The table/view 'Inventory_Test.dbo.RecentGamesView' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="DigitalServices">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.DigitalService">
+              <MappingFragment StoreEntitySet="DigitalService">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DigitalServiceId" ColumnName="DigitalServiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DigtialGames">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.DigtialGame">
+              <MappingFragment StoreEntitySet="DigtialGames">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="DigitalGameId" ColumnName="DigitalGameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetDigitalGameById" FunctionName="GameInventoryDBModel.Store.GetDigitalGameById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.GetDigitalGameById_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDigitalGameByGameId" FunctionName="GameInventoryDBModel.Store.GetDigitalGameByGameId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.GetDigitalGameByGameId_Result">
+                <ScalarProperty Name="DigitalGameId" ColumnName="DigitalGameId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="WantedGames">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.WantedGame">
+              <MappingFragment StoreEntitySet="WantedGames">
+                <ScalarProperty Name="ExpectedPrice" ColumnName="ExpectedPrice" />
+                <ScalarProperty Name="IdealPrice" ColumnName="IdealPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="HasAccessory" ColumnName="HasAccessory" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="HasManual" ColumnName="HasManual" />
+                <ScalarProperty Name="HasCase" ColumnName="HasCase" />
+                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="DeveloperId" ColumnName="DeveloperId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetWantedGameById" FunctionName="GameInventoryDBModel.Store.GetWantedGameById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.GetWantedGameById_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PlatformId" ColumnName="PlatformId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="WantedHardwares">
+            <EntityTypeMapping TypeName="GameInventoryDBModel.WantedHardware">
+              <MappingFragment StoreEntitySet="WantedHardware">
+                <ScalarProperty Name="ExpectedPrice" ColumnName="ExpectedPrice" />
+                <ScalarProperty Name="IdealPrice" ColumnName="IdealPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="HardwareItemName" ColumnName="HardwareItemName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Prices_SelectByConsoleName" FunctionName="GameInventoryDBModel.Store.Prices_SelectByConsoleName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GameInventoryDBModel.Prices_SelectByConsoleName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConsoleName" ColumnName="ConsoleName" />
+                <ScalarProperty Name="LoosePrice" ColumnName="LoosePrice" />
+                <ScalarProperty Name="CIBPrice" ColumnName="CIBPrice" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="UPC" ColumnName="UPC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Prices_SelectConsoleNames" FunctionName="GameInventoryDBModel.Store.Prices_SelectConsoleNames" />
         </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

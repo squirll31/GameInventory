@@ -35,6 +35,17 @@
         <AssociationConnector Association="GameInventoryDBModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="GameInventoryDBModel.PhysicalGame" Width="1.5" PointX="7.5" PointY="15.125" />
         <AssociationConnector Association="GameInventoryDBModel.FK_PhysicalGames_ToTable" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.DigitalService" Width="1.5" PointX="8.25" PointY="18.5" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.DigtialGame" Width="1.5" PointX="10.5" PointY="14.375" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_DigtialGames_ToTable" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_DigtialGames_Games" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.WantedGame" Width="1.5" PointX="5.25" PointY="15.75" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_WantedGames_ToGameDevCompany" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_WantedGames_ToGamePubCompany" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_WantedGames_ToGameOwners" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_WantedGames_ToGameRegions" />
+        <AssociationConnector Association="GameInventoryDBModel.FK_WantedGames_ToPlatforms" />
+        <EntityTypeShape EntityType="GameInventoryDBModel.WantedHardware" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

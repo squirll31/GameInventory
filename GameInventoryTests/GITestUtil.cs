@@ -52,7 +52,8 @@ namespace GameInventoryTests
                 Platform = x360,
                 Publishers = new List<GameCompanyModel> { capcom },
                 Developers = new List<GameCompanyModel> { capcom },
-                Service = "Xbox Live"
+                ServiceName = "Xbox Live",
+                ServiceId = 2
             };
             testGameList.Add(g1);
             testGameList.Add(g2);

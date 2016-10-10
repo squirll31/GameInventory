@@ -61,16 +61,21 @@ namespace GameInventory.Controllers
         // GET: CompanyRelationshipTypes/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CompanyRelationshipType companyRelationshipType = db.CompanyRelationshipTypes.Find(id);
+                if (companyRelationshipType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(companyRelationshipType);
+            }  else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            CompanyRelationshipType companyRelationshipType = db.CompanyRelationshipTypes.Find(id);
-            if (companyRelationshipType == null)
-            {
-                return HttpNotFound();
-            }
-            return View(companyRelationshipType);
         }
 
         // POST: CompanyRelationshipTypes/Edit/5
@@ -92,16 +97,22 @@ namespace GameInventory.Controllers
         // GET: CompanyRelationshipTypes/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CompanyRelationshipType companyRelationshipType = db.CompanyRelationshipTypes.Find(id);
+                if (companyRelationshipType == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(companyRelationshipType);
             }
-            CompanyRelationshipType companyRelationshipType = db.CompanyRelationshipTypes.Find(id);
-            if (companyRelationshipType == null)
-            {
-                return HttpNotFound();
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            return View(companyRelationshipType);
         }
 
         // POST: CompanyRelationshipTypes/Delete/5

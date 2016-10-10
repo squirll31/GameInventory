@@ -11,9 +11,12 @@
 <h2>Regions</h2>
 <h4>Total: @Model.Count()</h4>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table id="RegionTable" class="table table-striped">
     <thead>
         <tr>
@@ -33,9 +36,14 @@
                     @Html.DisplayFor(modelItem => item.GameRegionName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.GameRegionId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.GameRegionId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.GameRegionId })
+                    @if(User.Identity.IsAuthenticated)
+                    { 
+                        @Html.ActionLink("Edit", "Edit", new { id = item.GameRegionId }) @:|
+                        @Html.ActionLink("Details", "Details", new { id = item.GameRegionId }) @:|
+                        @Html.ActionLink("Delete", "Delete", new { id = item.GameRegionId })
+                    } else {
+                        @Html.ActionLink("Details", "Details", new { id = item.GameRegionId })
+                    }
                 </td>
             </tr>
         }

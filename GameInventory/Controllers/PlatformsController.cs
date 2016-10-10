@@ -40,8 +40,15 @@ namespace GameInventory.Controllers
         // GET: Platforms/Create
         public ActionResult Create()
         {
-            ViewBag.CompanyId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName");
+            if (this.User.Identity.IsAuthenticated)
+            {
+
+                ViewBag.CompanyId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName");
             return View();
+            }
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
         }
 
         // POST: Platforms/Create
@@ -65,17 +72,22 @@ namespace GameInventory.Controllers
         // GET: Platforms/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Platform platform = db.Platforms.Find(id);
+                if (platform == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.CompanyId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", platform.CompanyId);
+                return View(platform);
+            }  else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            Platform platform = db.Platforms.Find(id);
-            if (platform == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CompanyId = new SelectList(db.GameCompanies, "GameCompanyId", "GameCompanyName", platform.CompanyId);
-            return View(platform);
         }
 
         // POST: Platforms/Edit/5
@@ -98,16 +110,21 @@ namespace GameInventory.Controllers
         // GET: Platforms/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Platform platform = db.Platforms.Find(id);
+                if (platform == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(platform);
+            } else {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            Platform platform = db.Platforms.Find(id);
-            if (platform == null)
-            {
-                return HttpNotFound();
-            }
-            return View(platform);
         }
 
         // POST: Platforms/Delete/5

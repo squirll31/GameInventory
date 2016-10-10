@@ -14,6 +14,12 @@ namespace GameInventory
     
     public partial class Game
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Game()
+        {
+            this.DigtialGames = new HashSet<DigtialGame>();
+        }
+    
         public int GameId { get; set; }
         public int PlatformId { get; set; }
         public string Title { get; set; }
@@ -37,5 +43,7 @@ namespace GameInventory
         public virtual GameRegion GameRegion { get; set; }
         public virtual Platform Platform { get; set; }
         public virtual PhysicalGame PhysicalGame { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DigtialGame> DigtialGames { get; set; }
     }
 }

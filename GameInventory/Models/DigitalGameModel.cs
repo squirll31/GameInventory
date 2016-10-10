@@ -13,7 +13,25 @@ namespace GameInventory.Models
                                     IComparable<GameModel> {
         //[JsonProperty]
         [DataMember]
-        public string Service;
+        public string ServiceName;
+        [DataMember]
+        public int ServiceId;
+        [DataMember]
+        public int DigitalGameId;
+
+        public DigitalGameModel() : base() { }
+        public DigitalGameModel(int gameId)
+            : base(gameId)
+        {
+            using (GameInventoryDBEntities db = new GameInventoryDBEntities())
+            {
+                var game = db.GetDigitalGameByGameId(gameId).Single();
+                DigitalGameId = game.DigitalGameId;
+                ServiceName = game.ServiceName;
+                ServiceId = game.ServiceId;
+            }
+        }
+
         public int CompareTo(GameModel other)
         {
             if (other.Id == Id)
